@@ -1,0 +1,33 @@
+{
+  "name": "setup-dev-env",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/lethanhvietctt5/setup-dev-env.git",
+  "author": "lethanhvietctt5 <lethanhviet7c@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint \"src/**/*.ts\" --fix",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "postinstall": "husky install"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.27.1",
+    "@typescript-eslint/parser": "^5.27.1",
+    "eslint": "^8.17.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.30.0",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.1",
+    "prettier": "^2.6.2",
+    "ts-node": "^10.8.1",
+    "typescript": "^4.7.3"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "npm run lint",
+      "npm run format",
+      "git add ."
+    ]
+  }
+}
