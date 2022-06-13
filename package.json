@@ -8,7 +8,7 @@
   "scripts": {
     "lint": "eslint \"src/**/*.ts\" --fix",
     "format": "prettier --write \"src/**/*.ts\"",
-    "postinstall": "husky install"
+    "postinstall": "husky install && npx husky add .husky/pre-commit \"yarn lint-staged\""
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.27.1",
