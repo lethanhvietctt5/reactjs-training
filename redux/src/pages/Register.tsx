@@ -10,12 +10,14 @@ import { nanoid } from "nanoid";
 import { useForm } from "react-hook-form";
 import { HiOutlineMail } from "react-icons/hi";
 import { MdOutlinePassword } from "react-icons/md";
+import { BiRename } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
 import api from "../service";
 import "./Register.scss";
 
 type InputType = {
   email: string;
+  name: string;
   password: string;
 };
 
@@ -80,21 +82,33 @@ function Register() {
                 {...register("email")}
                 type="email"
                 placeholder="Enter email"
-                focusBorderColor="teal.500"
+                focusBorderColor="green.200"
+              />
+            </InputGroup>
+
+            <InputGroup colorScheme={"teal"}>
+              <InputLeftElement
+                pointerEvents="none"
+                children={<BiRename color="gray.100" />}
+              />
+              <Input
+                {...register("name")}
+                type="text"
+                placeholder="Enter your name"
+                focusBorderColor="green.200"
               />
             </InputGroup>
 
             <InputGroup>
               <InputLeftElement
                 pointerEvents="none"
-                color="gray.300"
                 fontSize="1.2em"
-                children={<MdOutlinePassword />}
+                children={<MdOutlinePassword color="gray.100" />}
               />
               <Input
                 {...register("password")}
                 type={"password"}
-                focusBorderColor="teal.500"
+                focusBorderColor="green.200"
                 placeholder="Enter password"
               />
             </InputGroup>
@@ -103,7 +117,8 @@ function Register() {
         <Button
           className="register_card_button"
           type="submit"
-          colorScheme="teal"
+          color="white"
+          backgroundColor="green.400"
           size="sm"
         >
           Register

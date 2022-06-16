@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Button,
   Input,
@@ -9,10 +8,13 @@ import {
 } from "@chakra-ui/react";
 import { HiOutlineMail } from "react-icons/hi";
 import { MdOutlinePassword } from "react-icons/md";
-import "./Login.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+
+import "./Login.scss";
 import api from "../service";
+import { login } from "../redux/slices/auth";
+import { useAppDispatch } from "../hooks";
 
 type InputType = {
   email: string;
@@ -22,6 +24,8 @@ type InputType = {
 function Login() {
   const { register, handleSubmit } = useForm<InputType>();
   const toast = useToast();
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   async function onSubmit(data: InputType) {
     if (data.email.length === 0 || data.password.length === 0) {
@@ -41,8 +45,8 @@ function Login() {
       const res = await api.get(
         `/users?email=${data.email}&password=${data.password}`
       );
-
-      console.log(res.data[0]);
+      dispatch(login(res.data[0]));
+      navigate("/");
     } catch (err) {
       toast({
         title: "Login failed.",
@@ -70,21 +74,20 @@ function Login() {
                 {...register("email")}
                 type="email"
                 placeholder="Enter email"
-                focusBorderColor="teal.500"
+                focusBorderColor="green.200"
               />
             </InputGroup>
 
             <InputGroup>
               <InputLeftElement
                 pointerEvents="none"
-                color="gray.300"
                 fontSize="1.2em"
                 children={<MdOutlinePassword />}
               />
               <Input
                 {...register("password")}
                 type={"password"}
-                focusBorderColor="teal.500"
+                focusBorderColor="green.200"
                 placeholder="Enter password"
               />
             </InputGroup>
@@ -96,7 +99,8 @@ function Login() {
         <Button
           className="login_card_button"
           type="submit"
-          colorScheme="teal"
+          color="white"
+          backgroundColor="green.400"
           size="sm"
         >
           Login
