@@ -8,6 +8,8 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 import Layout from "./layout";
 import Home from "./pages/Home";
+import CreatePost from "./pages/CreatePost";
+import ProtectdRoute from "./route/ProtectdRoute";
 
 const theme = extendTheme({
   fonts: {
@@ -27,6 +29,9 @@ function App() {
               <Route path="/register" element={<Register />} />
               <Route path="/" element={<Layout />}>
                 <Route index element={<Home />} />
+                <Route element={<ProtectdRoute redirectPath="/login" />}>
+                  <Route path="create" element={<CreatePost />} />
+                </Route>
               </Route>
             </Routes>
           </div>

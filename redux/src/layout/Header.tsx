@@ -1,3 +1,4 @@
+import { EditIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
@@ -32,17 +33,24 @@ function Header() {
       <Box w="80%">
         <Flex alignItems="center" justify="space-between">
           <Heading as="h1" size="xl">
-            <Text fontWeight="black">Blogs</Text>
+            <Link to="/">
+              <Text fontWeight="black">Blogs</Text>
+            </Link>
           </Heading>
           {user.email ? (
-            <Button
-              color="white"
-              backgroundColor="green.400"
-              size="md"
-              onClick={handleLogout}
-            >
-              Logout
-            </Button>
+            <Flex align="center" gap="4">
+              <Link to="/create">
+                <EditIcon w={10} color="green" h="full" p="2" />
+              </Link>
+              <Button
+                color="white"
+                backgroundColor="green.400"
+                size="md"
+                onClick={handleLogout}
+              >
+                Logout
+              </Button>
+            </Flex>
           ) : (
             <ButtonGroup gap={4}>
               <Link to="/login">
