@@ -6,6 +6,7 @@ import {
   Flex,
   Heading,
   Text,
+  Tooltip,
 } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hooks";
@@ -40,7 +41,9 @@ function Header() {
           {user.email ? (
             <Flex align="center" gap="4">
               <Link to="/create">
-                <EditIcon w={10} color="green" h="full" p="2" />
+                <Tooltip hasArrow label="Create new post">
+                  <EditIcon w={10} color="green" h="full" p="2" />
+                </Tooltip>
               </Link>
               <Button
                 color="white"

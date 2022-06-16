@@ -25,84 +25,68 @@
       "author_id": "gD7vpprRCBZTD83wBopw0",
       "title": "Tìm hiểu về Socket.io",
       "body": "Socket.io được tạo vào năm 2010. Nó được phát triển để tạo kết nối mở cho giao tiếp với thời gian thực, và là một hiện tượng vào thời điểm đó. Socket.io cho phép giao tiếp hai chiều giữa client và server. Giao tiếp hai chiều được kích hoạt khi client có socket.io trên trình duyệt và server cũng có tích hợp với socket.io. Dữ liệu được gửi có thể ở nhiều định dạng, đơn giản nhất là dùng JSON. Để thiết lập kết nối, và thay đổi dữ liệu giữa client và server, socket.io sử dụng engine.io. Đây là một triển khai thấp hơn ở bên trong nó. Engine.io được dữ dụng cho triển khai phía server và engine.io-client được dùng cho client.",
+      "author_name": "Le Thanh Viet",
       "created_at": 1655285730,
       "updated_at": 1655285730,
-      "tags": [
-        "socket",
-        "web-rtc"
-      ]
+      "tags": ["socket", "web-rtc"]
     },
     {
       "id": "83239",
       "author_id": "gD7vpprRCBZTD83wBopw0",
       "title": "Hiểu Về ODM-ORM",
       "body": "Nếu bạn đã từng làm việc với cơ sở dữ liệu, bạn sẽ được sự phức tạp trong các câu truy vấn khi dự án ngày một lớn hớn và nhiều khó khăn hơn cho việc debug. Bạn có biết các lập trình viên sẽ đối mặt với vấn đề này như thế nào? Một sự thực là người ta đã không còn dùng SQL raw cho các ứng dụng, trong khoảng thời gian đây. Vậy nếu không SQL thì họ dùng cái gì để truy vấn cơ sở dữ liệu? Câu trả lời chính là ORM/ODM. Có vô số ORM/ODM đang trôi nổi ngoài kia (sequelize, typeorm, mongoose,…) vì thế ở bài viết này ta không quan tâm đến chúng. Thay vào đó ta sẽ tìm hiểu định nghĩa ODM và ORM, sự khác biệt giữa hai loại, và cách chúng kết nối với cơ sở dữ liệu. Đồng thời so sánh với cách sử dụng SQL raw. Bây giờ ta sẽ bắt đầu trước với ORM.",
+      "author_name": "Le Thanh Viet",
       "created_at": 1655285730,
       "updated_at": 1655285730,
-      "tags": [
-        "orm",
-        "odm",
-        "database"
-      ]
+      "tags": ["orm", "odm", "database"]
     },
     {
       "id": "83234",
       "author_id": "gD7vpprRCBZTD83wBopw0",
       "title": "Tuỳ Chỉnh React Component Với Styled-Components",
       "body": "Tự động giới hạn CSS: styled-component theo dõi các component, nếu component được render ra trang web nó sẽ tự động chèn styles vào nó. Ngược lại thì không. Điều đó giúp tránh việc thêm styles cho component vẫn chưa được render, tối ưu hoá việc load css.Tránh lỗi className: styled-component tự động tạo ra mỗi tên không trùng với mỗi classNames. Nên không cần lo lắng về vấn đề các component gặp lỗi css do trùng tên.Xoá CSS dễ dàng hơn: thông thường, việc xoá css cho một component sẽ khá khó khăn vì ta không biết class css còn được sử dụng ở đâu. Nhưng với styled-component mọi thứ đơn giản hơn, vì các style sẽ gắn liền với một component cụ thế. Nếu một component không cần tới, ta có thể xoá nó cùng với các style của nó.Thiết kế động: vì viết bằng js, nên ta có thể truyền props hay global theme mà không cần quản lý tất cả các class theo cách thủ công.Dễ dàng bảo trì: không cần tìm các file khác nhau để xem styles nào ảnh hưởng đến component của bạn. Việc bảo trì sẽ dễ như ăn bánh dù dự án có lớn đến đâu.Tự động thêm prefix: viết css theo tiêu chuẩn của bạn và styled-component sẽ xử lý phần còn lại.",
+      "author_name": "Le Thanh Viet",
       "created_at": 1655285730,
       "updated_at": 1655285730,
-      "tags": [
-        "react",
-        "styled-component"
-      ]
+      "tags": ["react", "styled-component"]
     },
     {
       "id": "83244",
       "author_id": "gD7vpprRCBZTD83wBopw0",
       "title": "Kết Nối MongoDB Với Node.js Bằng Mongoose",
       "body": "Mục đích của bài viết này nhằm chia sẽ với mọi người các kiến thức về MongoDB và Node.js. Bài viết dành cho những beginners backend đang có hứng thú với NoSQL. Hy vọng sau bài viết này mọi người sẽ hiểu chính xác MongoDB, Mongoose và cách nó hoạt động với Node.js. Cuối bài viết mình có chia sẻ một project nhỏ đã làm với MERN Stack (Các bài viết về react, node.js mình đã viết trước đó). Trong bài viết này ta sẽ trả lời các câu hỏi: Làm thế nào ?Node.js với cơ sở dữ liệu? MongoDB là gì? NoSQL là gì? Mongoose là gì? Cách cài đặt Mongoose trong Node.js.Định nghĩa model CRUD và các thao tác khác.",
+      "author_name": "Le Thanh Viet",
       "created_at": 1655285730,
       "updated_at": 1655285730,
-      "tags": [
-        "mongodb",
-        "database",
-        "nodejs"
-      ]
+      "tags": ["mongodb", "database", "nodejs"]
     },
     {
       "id": "83245",
       "author_id": "gD7vpprRCBZTD83wBopw0",
       "title": "Các Phương Pháp Xác Thực Người Dùng",
       "body": "Để hiểu về cách xác định danh tính với web thì trước tiên phải hiểu giao thức mà các trang web đang dùng. Ở đây chúng là HTTP hay HTTPS, sự khác biệt của hai giao thức này nằm ở việc dữ liệu của HTTPS được bảo mật, tuy nhiên cả hai đều thực hiện request/response giữa client và server một cách độc lập. Tức là khi client thực hiện một request đến server (ở đây có thể là một HTTP POST để đăng ký hay đăng nhập). Server thực hiện tạo tài khoản ở cơ sở dữ liệu sau đấy gửi về response là HTTP Status 200 OK. Tuy nhiên khi đến câu lệnh request tiếp theo thì server không thể nhận biết được, client gửi request này có phải là client trước đó hay không. Ví dụ ở một trang blog mà người dùng tạo tài khoản sau đấy tiến hành đăng bài, thì server sẽ không xác định được request tạo tài khoản trước đó, và request tạo bài viết hiện tại có phải cùng một người không. Để giải quyết vấn đề này, HTTP tích hợp xác thực vào trong phần header của mỗi request.",
+      "author_name": "Le Thanh Viet",
       "created_at": 1655285730,
       "updated_at": 1655285730,
-      "tags": [
-        "authentication"
-      ]
+      "tags": ["authentication"]
     },
     {
       "id": "83246",
       "author_id": "gD7vpprRCBZTD83wBopw0",
       "title": "Quản Lý Dữ Liệu Đơn Giản Hơn Với Redux Toolkit",
       "body": "Redux là một công cụ quản lý state phổ biến trong React, tuy nhiên với nhiều người thì nó khá lằng nhằng vì phải xử lý từ action sau đấy chạy sang thiết lập reducer rồi chạy về store. Chưa kể còn phải quan tâm đến middleware, thunk hay saga,…chưa kể nó cũng không tiêu chuẩn về cách vài viết login nào cả và điều này rất phiền phức khi xây dựng các ứng dụng lớn. Như vậy redux toolkit ra đời để đem đến sự gọn gàng, và linh động hơn.Điều đầu tiên phải hiểu redux vẫn có 3 phần là action, reducer và store.",
+      "author_name": "Le Thanh Viet",
       "created_at": 1655285730,
       "updated_at": 1655285730,
-      "tags": [
-        "Redux",
-        "Redux-toolkit"
-      ]
+      "tags": ["Redux", "Redux-toolkit"]
     },
     {
       "id": "BLO35p7ckFvWrM8MnYei-",
       "author_id": "gD7vpprRCBZTD83wBopw0",
       "title": "Làm Thế Nào React Hook Có Thể Thay Thế Class Component",
       "body": "Chúng ta đều biết rằng React có hai loại component là Function Component và Class Component. Trong đó chỉ có Class Component là có state và lifecycle, còn về Function nó là stateless tức là không có state nó chỉ có thể hiển thị dữ liệu được nhận vào thông qua params và nó cũng chẳng có lifecycle tức là các component sẽ không có thay đổi, nên nó chỉ có thể làm UI chứ không thể tạo các thao tác UX. Tuy nhiên đấy chỉ là trước khi version React 16 được cập nhật. Từ đấy về sau Class Component ngày càng mất dần chỗ đứng và vị thế vốn có, nó đã bị Function hất vâng khỏi ngôi vương nhờ vào thanh bảo kiếm mang tên Hooks.",
-      "tags": [
-        "reacjs",
-        "react-hooks"
-      ],
-      "auth_name": "Le Thanh Viet",
+      "tags": ["reacjs", "react-hooks"],
+      "author_name": "Le Thanh Viet",
       "created_at": 1655358541883,
       "updated_at": 1655358541883
     },
@@ -111,12 +95,8 @@
       "author_id": "o5cOrvKiigRyjD-2mNR0m",
       "title": "Hiểu Sâu Về Quá Trình Hoạt Động Của Webpack",
       "body": "Webppack là một công cụ hấp dẫn và mạnh mẽ, nó được xem như một thành phần hữu ích cho xây dựng web hiện đại được các lập trình viên thường xuyên sử dụng. Tuy nhiên, để làm việc với nó vẫn là một thử thách không dễ, nếu không muốn nói là rất phức tạp.\n\nTrong bài viết này ta sẽ nói về các chi tiết hoạt động bên trong của Webpack, hy vọng rằng nó sẽ giúp webpack trông dễ tiếp cận hơn. Bài viết này sẽ cung cấp các kiến thức cơ bản về tính năng của webpack, bạn sẽ học được cách hoạt động của lazy loading, tree shaking, hay cách hoạt động của loader. Mục tiêu là bạn sẽ cảm thấy dễ dàng hơn khi giải quyết các vấn đề liên quan đến webpack.",
-      "tags": [
-        "react",
-        "bundler",
-        "webpack"
-      ],
-      "auth_name": "Vo Trong Gia Vinh",
+      "tags": ["react", "bundler", "webpack"],
+      "author_name": "Vo Trong Gia Vinh",
       "created_at": 1655358710418,
       "updated_at": 1655358710418
     },
@@ -125,12 +105,8 @@
       "author_id": "o5cOrvKiigRyjD-2mNR0m",
       "title": "Kiến Trúc PostgreSQL",
       "body": "Thao tác đọc và ghi trong bộ nhớ luôn nhanh hơn bất kỳ thao tác nào khác. Thế nên các cơ sở dữ liệu luôn cần bộ nhớ để truy cập nhanh dữ liệu, mỗi khi có truy cập READ và WRITE xuất hiện. Trong PostgreSQL đấy chính là Shared Buffer (được điều khiển bởi tham số shared_buffers). Dung lượng RAM được cấp phát cho Shared Buffer sẽ là cố định trong suốt thời gian chạy PostgreSQL. Shared Buffer có thể được truy cập bởi tất cả tiến trình server và người dùng kết nối đến cơ sở dữ liệu.\n\nDữ liệu được ghi hay chỉnh sửa trong Shared Buffer được gọi là dirty data, và các đơn vị thao tác trong csdl block (hay page) thay đổi được gọi là dirty block hay dirty page. Dirty data sẽ được ghi vào file vật lý liên tục trên ở đĩa, các file này được gọi là file dữ liệu (data file).\n\nMục đích của Shared Buffer là để giảm thiểu các tác vụ I/O lên đĩa (DISK IO). Để đạt được mục đích đó, nó phải đáp ứng được những yêu cầu sau:\n\nPhải truy cập bộ nhớ đệm lớn(hàng chục, trăm gigabites) nhanh chóng.\nTối thiểu hoá xung đột khi nhiều người dùng truy cập cùng lúc.\nCác blocks được sử dụng thường xuyên phải ở trong bộ đệm càng lâu càng tốt.",
-      "tags": [
-        "database",
-        "postgresql",
-        "sql"
-      ],
-      "auth_name": "Vo Trong Gia Vinh",
+      "tags": ["database", "postgresql", "sql"],
+      "author_name": "Vo Trong Gia Vinh",
       "created_at": 1655358803002,
       "updated_at": 1655358803002
     }

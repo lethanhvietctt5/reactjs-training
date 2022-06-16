@@ -10,6 +10,7 @@ import Layout from "./layout";
 import Home from "./pages/Home";
 import CreatePost from "./pages/CreatePost";
 import ProtectdRoute from "./route/ProtectdRoute";
+import PostDetail from "./pages/PostDetail";
 
 const theme = extendTheme({
   fonts: {
@@ -32,6 +33,7 @@ function App() {
                 <Route element={<ProtectdRoute redirectPath="/login" />}>
                   <Route path="create" element={<CreatePost />} />
                 </Route>
+                <Route path=":post_id" element={<PostDetail />} />
               </Route>
             </Routes>
           </div>
