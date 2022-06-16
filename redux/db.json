@@ -23,12 +23,12 @@
     {
       "id": "83238",
       "author_id": "gD7vpprRCBZTD83wBopw0",
-      "title": "Tìm hiểu về Socket.io",
+      "title": "Tìm hiểu về Socket.io ",
       "body": "Socket.io được tạo vào năm 2010. Nó được phát triển để tạo kết nối mở cho giao tiếp với thời gian thực, và là một hiện tượng vào thời điểm đó. Socket.io cho phép giao tiếp hai chiều giữa client và server. Giao tiếp hai chiều được kích hoạt khi client có socket.io trên trình duyệt và server cũng có tích hợp với socket.io. Dữ liệu được gửi có thể ở nhiều định dạng, đơn giản nhất là dùng JSON. Để thiết lập kết nối, và thay đổi dữ liệu giữa client và server, socket.io sử dụng engine.io. Đây là một triển khai thấp hơn ở bên trong nó. Engine.io được dữ dụng cho triển khai phía server và engine.io-client được dùng cho client.",
+      "tags": ["socket", "web-rtc"],
       "author_name": "Le Thanh Viet",
-      "created_at": 1655285730,
-      "updated_at": 1655285730,
-      "tags": ["socket", "web-rtc"]
+      "created_at": 1655367688211,
+      "updated_at": 1655367726723
     },
     {
       "id": "83239",
@@ -45,10 +45,10 @@
       "author_id": "gD7vpprRCBZTD83wBopw0",
       "title": "Tuỳ Chỉnh React Component Với Styled-Components",
       "body": "Tự động giới hạn CSS: styled-component theo dõi các component, nếu component được render ra trang web nó sẽ tự động chèn styles vào nó. Ngược lại thì không. Điều đó giúp tránh việc thêm styles cho component vẫn chưa được render, tối ưu hoá việc load css.Tránh lỗi className: styled-component tự động tạo ra mỗi tên không trùng với mỗi classNames. Nên không cần lo lắng về vấn đề các component gặp lỗi css do trùng tên.Xoá CSS dễ dàng hơn: thông thường, việc xoá css cho một component sẽ khá khó khăn vì ta không biết class css còn được sử dụng ở đâu. Nhưng với styled-component mọi thứ đơn giản hơn, vì các style sẽ gắn liền với một component cụ thế. Nếu một component không cần tới, ta có thể xoá nó cùng với các style của nó.Thiết kế động: vì viết bằng js, nên ta có thể truyền props hay global theme mà không cần quản lý tất cả các class theo cách thủ công.Dễ dàng bảo trì: không cần tìm các file khác nhau để xem styles nào ảnh hưởng đến component của bạn. Việc bảo trì sẽ dễ như ăn bánh dù dự án có lớn đến đâu.Tự động thêm prefix: viết css theo tiêu chuẩn của bạn và styled-component sẽ xử lý phần còn lại.",
+      "tags": ["react", "styled-component"],
       "author_name": "Le Thanh Viet",
-      "created_at": 1655285730,
-      "updated_at": 1655285730,
-      "tags": ["react", "styled-component"]
+      "created_at": 1655367693851,
+      "updated_at": 1655367693851
     },
     {
       "id": "83244",
@@ -109,6 +109,16 @@
       "author_name": "Vo Trong Gia Vinh",
       "created_at": 1655358803002,
       "updated_at": 1655358803002
+    },
+    {
+      "id": "iTRZPcZ77DBO4f4E7TzPi",
+      "author_id": "gD7vpprRCBZTD83wBopw0",
+      "title": "Này anh em lập trình viên – Ngày hôm nay của bạn thế nào?",
+      "body": "Đây là bài viết tâm sự của một người đang chất chứa sự mệt mỏi với những ngày dài làm việc và lướt qua những câu nói mang tính đánh giá quá cao ngành công nghệ thông tin nói chung và phát triển phần mềm nói riêng.\n\nCái ngành này giàu lắm. Giàu đâu mình chẳng thấy, từ khi ra trường thì cũng đạt mức lương cơ bản như ai, học nhanh học lẹ để đi thực tập sớm thì lại không lương nhé em. Ừ thì chấp nhận đó là sự đánh đổi cho học phí trải nghiệm đầu đời mang tên “Internship”. \n\nThế rồi làm nhân viên chính thức một công ty A nào đó cũng được đào tạo được cho là bài bản, nhưng nếu bản thân mà không chịu cố gắng học hỏi thì có lẽ không có bất kỳ ai có nghĩa vụ phải dạy bạn đâu. Cố gắng vừa bơi với task và vừa phải bổ sung kiến thức mà khi ngồi trên ghế nhà trường chẳng hề được nhắc đến huống chi là học. \n\nDù gì đi chăng nữa thì cũng là phận đi làm được nhận lương mà, làm cho ra làm nhưng vẫn phải tranh thủ mà lấp đầy những chỗ hổng vào nhưng đêm cày bục mặt mặc dù rất mệt. Có chăng tuổi trẻ, đang sức xuân và một con trâu đúng nghĩa luôn vậy. \n\nĐừng nói giàu nhưng báo vẫn rêu rao, lương khởi điểm thì cũng như những ngành khác thôi. Có chăng thì được coi là dễ xin việc hơn chút, không phải lo lót chạy chọt vào biên chế hay chắc ghế của một số ngành xyz nào đó ngoài kia.\n\nCũng phải vững kiến thức một chút và làm được việc, mang lại giá trị cho công ty thì lúc này lương mới tăng được. Và đúng là giai đoạn này nếu bạn chăm chỉ học hỏi và tích lũy kiến thức thì khả năng tăng lương nhảy vọt của bạn có phần cao hơn một chút. Xui thay nếu gặp phải những công ty nhây nhây tuy nhìn ra được sự phát triển của bạn nhưng vẫn lơ đi và cố bóc lột thêm thời gian nào hay thời gian đó.\n\nVậy nên, nếu nói giàu thì chắc chắn là không nhé, có chăng chỉ dễ dàng học hỏi cố gắng cũng như cống hiến thôi, kiểu như nhìn thấy được thành quá nhanh một chút hơn so với ngành nghề khác. Tuy nhiên nếu so với những công sức bỏ ra để cày bạt mạng thì đúng là nó vẫn không thể cho là việc nhẹ lương cao đâu nhé.",
+      "tags": ["life", "programmer"],
+      "author_name": "Le Thanh Viet",
+      "created_at": 1655367844524,
+      "updated_at": 1655367844524
     }
   ]
 }

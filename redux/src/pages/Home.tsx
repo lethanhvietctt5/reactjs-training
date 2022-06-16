@@ -32,8 +32,6 @@ function Home() {
 
           setPosts(posts);
         }
-
-        console.log(res);
       } catch (err) {}
     }
 

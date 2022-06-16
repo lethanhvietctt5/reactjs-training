@@ -6,10 +6,13 @@ import { FiEdit2 } from "react-icons/fi";
 import { useParams } from "react-router-dom";
 import { BsBookmark } from "react-icons/bs";
 import api from "../service";
+import { useAppSelector } from "../hooks";
+import { Link } from "react-router-dom";
 
 function PostDetail() {
   const { post_id } = useParams();
   const [post, setPost] = useState<Post | null>(null);
+  const auth = useAppSelector((state) => state.auth);
 
   useEffect(() => {
     async function fetchPost() {
@@ -41,9 +44,13 @@ function PostDetail() {
           <Tooltip shouldWrapChildren hasArrow label="Add to bookmark">
             <BsBookmark color="gray" cursor="pointer" size="25" />
           </Tooltip>
-          <Tooltip shouldWrapChildren hasArrow label="Edit this post">
-            <FiEdit2 color="gray" cursor="pointer" size="25" />
-          </Tooltip>
+          {auth.id === post?.author_id && (
+            <Tooltip shouldWrapChildren hasArrow label="Edit this post">
+              <Link to={`/edit/${post.id}`}>
+                <FiEdit2 color="gray" cursor="pointer" size="25" />
+              </Link>
+            </Tooltip>
+          )}
         </Flex>
       </Flex>
       <Text mt="4" fontWeight="bold">
