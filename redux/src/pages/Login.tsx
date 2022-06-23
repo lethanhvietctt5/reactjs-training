@@ -43,7 +43,7 @@ function Login() {
   }, [auth.failed, toastError]);
 
   if (auth.currentUser.email) {
-    return <Navigate to="/" />;
+    return <Navigate to="/posts" />;
   }
 
   return (

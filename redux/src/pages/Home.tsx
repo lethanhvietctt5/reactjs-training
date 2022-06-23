@@ -5,11 +5,20 @@ import api from "../api";
 import Post from "types/post";
 import User from "types/user";
 import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
+import { useSearchParams } from "react-router-dom";
 
 function Home() {
   const [posts, setPosts] = useState([] as Post[]);
+  const [params, setParams] = useSearchParams();
   const [page, setPage] = useState(1);
   const limit = 8;
+  const [arrPages, setArrPages] = useState([1, 2, 3, 4, 5]);
+
+  useEffect(() => {
+    if (params.has("page")) {
+      setPage(parseInt(params.get("page") as string));
+    }
+  }, [params]);
 
   useEffect(() => {
     async function fetchAuthor(id: string) {
@@ -43,6 +52,16 @@ function Home() {
     fetchPosts();
   }, [page]);
 
+  useEffect(() => {
+    if (page > Math.max(...arrPages)) {
+      setArrPages(arrPages.map((num, index) => index + page));
+    }
+
+    if (page < Math.min(...arrPages) && page > 1) {
+      setArrPages(arrPages.map((num, index) => num - page));
+    }
+  }, [page, arrPages]);
+
   return (
     <Box py="10">
       <Grid templateColumns="repeat(4,1fr)" gap="6">
@@ -59,16 +78,16 @@ function Home() {
           }}
           icon={<ArrowLeftIcon p="1" color="gray.600" />}
           onClick={() => {
-            if (page > 1) setPage(page - 1);
+            if (page > 1) setParams({ page: String(page - 1) });
           }}
         />
-        {Array.from(Array(5).keys()).map((num) =>
-          num + 1 === page ? (
+        {arrPages.map((num) =>
+          num === page ? (
             <Avatar
               key={num}
               bg="green.300"
               cursor="pointer"
-              icon={<Box color="gray.600">{num + 1}</Box>}
+              icon={<Box color="gray.600">{num}</Box>}
             />
           ) : (
             <Avatar
@@ -78,8 +97,8 @@ function Home() {
               _hover={{
                 bg: "green.300",
               }}
-              icon={<Box color="gray.600">{num + 1}</Box>}
-              onClick={() => setPage(num + 1)}
+              icon={<Box color="gray.600">{num}</Box>}
+              onClick={() => setParams({ page: String(num) })}
             />
           )
         )}
@@ -90,7 +109,7 @@ function Home() {
             bg: "green.300",
           }}
           icon={<ArrowRightIcon p="1" color="gray.600" />}
-          onClick={() => setPage(page + 1)}
+          onClick={() => setParams({ page: String(page + 1) })}
         />
       </Flex>
     </Box>

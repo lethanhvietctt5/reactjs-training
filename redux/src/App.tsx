@@ -32,11 +32,14 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/" element={<Layout />}>
-                <Route index element={<Home />} />
+                <Route path="posts" element={<Home />} />
                 <Route element={<ProtectdRoute redirectPath="/login" />}>
                   <Route path="create" element={<CreatePost />} />
                   <Route path="bookmark" element={<Bookmark />} />
-                  <Route path="edit" element={<AuthorRoute redirectPath="/" />}>
+                  <Route
+                    path="edit"
+                    element={<AuthorRoute redirectPath="/posts" />}
+                  >
                     <Route path=":post_id" element={<EditPost />} />
                   </Route>
                 </Route>

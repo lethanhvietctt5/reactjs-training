@@ -35,7 +35,7 @@ function Header() {
       <Box w="80%">
         <Flex alignItems="center" justify="space-between">
           <Heading as="h1" size="xl">
-            <Link to="/">
+            <Link to="/posts">
               <Text fontWeight="black">Blogs</Text>
             </Link>
           </Heading>

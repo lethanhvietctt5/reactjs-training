@@ -4,7 +4,6 @@ import {
   InputGroup,
   InputLeftElement,
   Stack,
-  useToast,
 } from "@chakra-ui/react";
 import { nanoid } from "nanoid";
 import { useForm } from "react-hook-form";
@@ -12,7 +11,8 @@ import { HiOutlineMail } from "react-icons/hi";
 import { MdOutlinePassword } from "react-icons/md";
 import { BiRename } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
-import api from "../api";
+import useCustomToast from "hooks/useCustomToast";
+import api from "api";
 import "./Register.scss";
 
 type InputType = {
@@ -24,19 +24,12 @@ type InputType = {
 function Register() {
   const { register, handleSubmit } = useForm<InputType>();
 
-  const toast = useToast();
+  const { toastError, toastSuccess } = useCustomToast();
   const navigate = useNavigate();
 
   async function onSubmit(data: InputType) {
     if (data.email.length === 0 || data.password.length === 0) {
-      toast({
-        title: "Register failed.",
-        description: "Please enter all field.",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-        position: "top",
-      });
+      toastError("Register failed! Please enter all field.");
       return;
     }
 
@@ -44,26 +37,11 @@ function Register() {
       const res = await api.post(`/users`, { id: nanoid(), ...data });
 
       if (res.data) {
-        toast({
-          title: "Register successful.",
-          description: "Let login to new account.",
-          status: "success",
-          duration: 3000,
-          isClosable: true,
-          position: "top",
-        });
-
+        toastSuccess("Register successful! Let login to new account.");
         navigate("/login");
       }
     } catch (err) {
-      toast({
-        title: "Register failed.",
-        description: "Please try again.",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-        position: "top",
-      });
+      toastError("Register failed! Please try again.");
     }
   }
 

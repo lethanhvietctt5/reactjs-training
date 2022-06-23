@@ -8,13 +8,13 @@ import {
   TagLabel,
   Text,
   Textarea,
-  useToast,
 } from "@chakra-ui/react";
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useAppSelector } from "../hooks";
-import api from "../api";
+import { useAppSelector } from "hooks";
+import api from "api";
 import Post from "types/post";
+import useCustomToast from "hooks/useCustomToast";
 
 function EditPost() {
   const [tags, setTags] = useState<string[]>([]);
@@ -24,7 +24,7 @@ function EditPost() {
   const auth = useAppSelector((state) => state.auth);
   const navigate = useNavigate();
   const { post_id } = useParams();
-  const toast = useToast();
+  const { toastSuccess } = useCustomToast();
   const [post, setPost] = useState<Post | null>(null);
 
   useEffect(() => {
@@ -65,17 +65,9 @@ function EditPost() {
       created_at: post?.created_at,
       updated_at: new Date().getTime(),
     });
+    toastSuccess("Edit have saved successful.");
 
-    toast({
-      title: "Edit have saved successful.",
-      description: "Let check again.",
-      status: "success",
-      duration: 2000,
-      isClosable: true,
-      position: "top",
-    });
-
-    navigate("/");
+    navigate("/posts");
   }
 
   const arr_color = [

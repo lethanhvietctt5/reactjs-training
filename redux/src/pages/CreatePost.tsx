@@ -8,13 +8,13 @@ import {
   TagLabel,
   Text,
   Textarea,
-  useToast,
 } from "@chakra-ui/react";
 import { nanoid } from "nanoid";
 import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAppSelector } from "../hooks";
-import api from "../api";
+import { useAppSelector } from "hooks";
+import api from "api";
+import useCustomToast from "hooks/useCustomToast";
 
 function CreatePost() {
   const [tags, setTags] = useState<string[]>([]);
@@ -23,7 +23,7 @@ function CreatePost() {
   const bodyRef = useRef<HTMLTextAreaElement>(null);
   const auth = useAppSelector((state) => state.auth);
   const navigate = useNavigate();
-  const toast = useToast();
+  const { toastSuccess } = useCustomToast();
 
   function addTag(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -45,16 +45,9 @@ function CreatePost() {
       updated_at: new Date().getTime(),
     });
 
-    toast({
-      title: "Created new post successful.",
-      description: "Let check again.",
-      status: "success",
-      duration: 2000,
-      isClosable: true,
-      position: "top",
-    });
+    toastSuccess("Created new post successful.");
 
-    navigate("/");
+    navigate("/posts");
   }
 
   const arr_color = [
