@@ -4,17 +4,17 @@ import {
   InputGroup,
   InputLeftElement,
   Stack,
-  useToast,
 } from "@chakra-ui/react";
 import { HiOutlineMail } from "react-icons/hi";
 import { MdOutlinePassword } from "react-icons/md";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 import "./Login.scss";
-import api from "../service";
 import { login } from "../redux/slices/auth";
-import { useAppDispatch } from "../hooks";
+import { useAppDispatch, useAppSelector } from "../hooks";
+import useCustomToast from "src/hooks/useCustomToast";
+import { useEffect } from "react";
 
 type InputType = {
   email: string;
@@ -23,40 +23,27 @@ type InputType = {
 
 function Login() {
   const { register, handleSubmit } = useForm<InputType>();
-  const toast = useToast();
+  const auth = useAppSelector((state) => state.auth);
+  const { toastError } = useCustomToast();
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-
   async function onSubmit(data: InputType) {
     if (data.email.length === 0 || data.password.length === 0) {
-      toast({
-        title: "Login failed.",
-        description: "Please enter all field.",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-        position: "top",
-      });
-
+      toastError("Login failed! Please enter all field.");
       return;
     }
 
-    try {
-      const res = await api.get(
-        `/users?email=${data.email}&password=${data.password}`
-      );
-      dispatch(login(res.data[0]));
-      navigate("/");
-    } catch (err) {
-      toast({
-        title: "Login failed.",
-        description: "Please try again.",
-        status: "error",
-        duration: 3000,
-        isClosable: true,
-        position: "top",
-      });
+    const { email, password } = data;
+    dispatch(login({ email, password }));
+  }
+
+  useEffect(() => {
+    if (auth.failed) {
+      toastError("Login failed! Email or Password is wrong.");
     }
+  }, [auth.failed, toastError]);
+
+  if (auth.currentUser.email) {
+    return <Navigate to="/" />;
   }
 
   return (

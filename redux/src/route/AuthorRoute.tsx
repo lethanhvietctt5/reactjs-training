@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Navigate, Outlet, useParams } from "react-router-dom";
 import { useAppSelector } from "../hooks";
-import api from "../service";
+import api from "../api";
 
 type Props = {
   redirectPath: string;
@@ -27,7 +27,7 @@ function AuthorRoute({ redirectPath }: Props) {
     return <div>Loading</div>;
   }
 
-  if (auth.id !== post?.author_id && !loading)
+  if (auth.currentUser.id !== post?.author_id && !loading)
     return <Navigate to={redirectPath} replace />;
   return <Outlet />;
 }

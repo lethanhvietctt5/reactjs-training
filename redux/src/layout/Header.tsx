@@ -13,7 +13,7 @@ import { useAppDispatch, useAppSelector } from "../hooks";
 import { logout } from "../redux/slices/auth";
 
 function Header() {
-  const user = useAppSelector((state) => state.auth);
+  const auth = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
 
   function handleLogout() {
@@ -38,7 +38,7 @@ function Header() {
               <Text fontWeight="black">Blogs</Text>
             </Link>
           </Heading>
-          {user.email ? (
+          {auth.currentUser.email ? (
             <Flex align="center" gap="4">
               <Link to="/create">
                 <Tooltip hasArrow label="Create new post">

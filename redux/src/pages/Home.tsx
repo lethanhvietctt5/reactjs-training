@@ -1,7 +1,7 @@
 import { Box, Grid } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import BlogItem from "../components/BlogItem";
-import api from "../service";
+import api from "../api";
 
 function Home() {
   const [posts, setPosts] = useState([] as Post[]);

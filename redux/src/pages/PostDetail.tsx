@@ -5,7 +5,7 @@ import { AiOutlineUser } from "react-icons/ai";
 import { FiEdit2 } from "react-icons/fi";
 import { useParams } from "react-router-dom";
 import { BsBookmark } from "react-icons/bs";
-import api from "../service";
+import api from "../api";
 import { useAppSelector } from "../hooks";
 import { Link } from "react-router-dom";
 
@@ -44,7 +44,7 @@ function PostDetail() {
           <Tooltip shouldWrapChildren hasArrow label="Add to bookmark">
             <BsBookmark color="gray" cursor="pointer" size="25" />
           </Tooltip>
-          {auth.id === post?.author_id && (
+          {auth.currentUser.id === post?.author_id && (
             <Tooltip shouldWrapChildren hasArrow label="Edit this post">
               <Link to={`/edit/${post.id}`}>
                 <FiEdit2 color="gray" cursor="pointer" size="25" />

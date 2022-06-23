@@ -1,33 +1,58 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
-const initState: User = {
-  id: "",
-  name: "",
-  email: "",
-  password: "",
+export interface AuthState {
+  logining: boolean;
+  failed: boolean;
+  currentUser: User;
+}
+
+const initState: AuthState = {
+  logining: false,
+  failed: false,
+  currentUser: {
+    id: "",
+    name: "",
+    email: "",
+    password: "",
+  },
+};
+
+export type LoginPayload = {
+  email: string;
+  password: string;
 };
 
 const authSlice = createSlice({
   name: "authenticate",
   initialState: initState,
   reducers: {
-    login: (state, action: PayloadAction<User>) => {
-      state.email = action.payload.email;
-      state.name = action.payload.name;
-      state.id = action.payload.id;
-      state.password = "";
+    login: (state, action: PayloadAction<LoginPayload>) => {
+      state.logining = true;
+      state.failed = false;
+    },
+    loginSuccess: (state, action: PayloadAction<User>) => {
+      state.logining = false;
+      state.failed = false;
+      state.currentUser.email = action.payload.email;
+      state.currentUser.name = action.payload.name;
+      state.currentUser.id = action.payload.id;
+      state.currentUser.password = "";
+    },
+    loginFailed: (state) => {
+      state.logining = false;
+      state.failed = true;
     },
     logout: (state) => {
-      state.email = "";
-      state.name = "";
-      state.id = "";
-      state.password = "";
+      state.currentUser.email = "";
+      state.currentUser.name = "";
+      state.currentUser.id = "";
+      state.currentUser.password = "";
     },
   },
 });
 
 const authReducer = authSlice.reducer;
 
-export const { login, logout } = authSlice.actions;
+export const { login, loginSuccess, loginFailed, logout } = authSlice.actions;
 
 export default authReducer;

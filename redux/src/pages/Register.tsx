@@ -12,7 +12,7 @@ import { HiOutlineMail } from "react-icons/hi";
 import { MdOutlinePassword } from "react-icons/md";
 import { BiRename } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
-import api from "../service";
+import api from "../api";
 import "./Register.scss";
 
 type InputType = {

@@ -14,7 +14,7 @@ import { nanoid } from "nanoid";
 import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "../hooks";
-import api from "../service";
+import api from "../api";
 
 function CreatePost() {
   const [tags, setTags] = useState<string[]>([]);
@@ -36,11 +36,11 @@ function CreatePost() {
   async function handleCreate() {
     await api.post("posts", {
       id: nanoid(),
-      author_id: auth.id,
+      author_id: auth.currentUser.id,
       title: titleRef.current?.value,
       body: bodyRef.current?.value,
       tags: tags,
-      author_name: auth.name,
+      author_name: auth.currentUser.name,
       created_at: new Date().getTime(),
       updated_at: new Date().getTime(),
     });

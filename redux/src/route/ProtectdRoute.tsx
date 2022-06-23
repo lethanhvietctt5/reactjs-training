@@ -9,7 +9,7 @@ type Props = {
 function ProtectdRoute({ redirectPath }: Props) {
   const auth = useAppSelector((state) => state.auth);
 
-  if (!auth.email) return <Navigate to={redirectPath} replace />;
+  if (!auth.currentUser.email) return <Navigate to={redirectPath} replace />;
   return <Outlet />;
 }
 

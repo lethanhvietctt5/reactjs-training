@@ -10,11 +10,10 @@ import {
   Textarea,
   useToast,
 } from "@chakra-ui/react";
-import { nanoid } from "nanoid";
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppSelector } from "../hooks";
-import api from "../service";
+import api from "../api";
 
 function EditPost() {
   const [tags, setTags] = useState<string[]>([]);
@@ -57,11 +56,11 @@ function EditPost() {
   async function handeEdit() {
     await api.put("posts/" + post_id, {
       id: post?.id,
-      author_id: auth.id,
+      author_id: auth.currentUser.id,
       title: titleRef.current?.value,
       body: bodyRef.current?.value,
       tags: tags,
-      author_name: auth.name,
+      author_name: auth.currentUser.name,
       created_at: post?.created_at,
       updated_at: new Date().getTime(),
     });
