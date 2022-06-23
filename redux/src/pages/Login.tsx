@@ -13,7 +13,7 @@ import { useForm } from "react-hook-form";
 import "./Login.scss";
 import { login } from "../redux/slices/auth";
 import { useAppDispatch, useAppSelector } from "../hooks";
-import useCustomToast from "src/hooks/useCustomToast";
+import useCustomToast from "hooks/useCustomToast";
 import { useEffect } from "react";
 
 type InputType = {

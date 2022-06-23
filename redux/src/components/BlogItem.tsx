@@ -1,6 +1,7 @@
 import { TimeIcon } from "@chakra-ui/icons";
 import { Badge, Box, Flex, Heading, Text } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import Post from "types/post";
 
 type Props = {
   post: Post;

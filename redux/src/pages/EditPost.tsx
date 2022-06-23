@@ -14,6 +14,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppSelector } from "../hooks";
 import api from "../api";
+import Post from "types/post";
 
 function EditPost() {
   const [tags, setTags] = useState<string[]>([]);

@@ -2,12 +2,14 @@ import { configureStore } from "@reduxjs/toolkit";
 import authReducer from "./slices/auth";
 import createSagaMiddleware from "redux-saga";
 import watchRootSaga from "./sagas/rootSaga";
+import bookmarkReducer from "./slices/bookmark";
 
 const sagaMiddleware = createSagaMiddleware();
 
 const store = configureStore({
   reducer: {
     auth: authReducer,
+    bookmark: bookmarkReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(sagaMiddleware),

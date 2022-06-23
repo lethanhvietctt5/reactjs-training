@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Navigate, Outlet, useParams } from "react-router-dom";
 import { useAppSelector } from "../hooks";
 import api from "../api";
+import Post from "types/post";
 
 type Props = {
   redirectPath: string;

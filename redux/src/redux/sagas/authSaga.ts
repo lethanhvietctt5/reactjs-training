@@ -3,7 +3,8 @@ import { call, put, takeEvery } from "redux-saga/effects";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { loginFailed, LoginPayload, loginSuccess } from "../slices/auth";
 import { login } from "../slices/auth";
-import authApi from "src/api/authApi";
+import authApi from "api/authApi";
+import User from "types/user";
 
 function* loginWorker(action: PayloadAction<LoginPayload>) {
   try {

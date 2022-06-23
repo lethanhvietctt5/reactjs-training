@@ -1,10 +1,3 @@
-type User = {
-  id: string;
-  name: string;
-  email: string;
-  password: string;
-};
-
 type Post = {
   id: string;
   author_id: string;
@@ -15,3 +8,5 @@ type Post = {
   created_at: number;
   updated_at: number;
 };
+
+export default Post;

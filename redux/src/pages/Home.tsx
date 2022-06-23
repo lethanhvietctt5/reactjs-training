@@ -2,6 +2,8 @@ import { Box, Grid } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import BlogItem from "../components/BlogItem";
 import api from "../api";
+import Post from "types/post";
+import User from "types/user";
 
 function Home() {
   const [posts, setPosts] = useState([] as Post[]);

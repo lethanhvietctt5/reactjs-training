@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import User from "types/user";
 
 export interface AuthState {
   logining: boolean;
