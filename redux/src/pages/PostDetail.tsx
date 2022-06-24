@@ -42,21 +42,10 @@ function PostDetail() {
     }
   }
 
-  console.log(bookmarks);
-
   const arr_color = ["orange.400", "blue.400", "green.400", "yellow.400"];
 
   return (
-    <Box
-      w="80%"
-      mx="auto"
-      py="10"
-      px="20"
-      my="10"
-      minH="80vh"
-      backgroundColor="white"
-      rounded="md"
-    >
+    <Box w="80%" mx="auto" py="10" px="20" my="10" minH="80vh" backgroundColor="white" rounded="md">
       <Flex justify="space-between" align="center">
         <Heading size="lg" fontWeight="900">
           {post?.title}

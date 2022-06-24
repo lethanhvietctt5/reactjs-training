@@ -2,11 +2,7 @@ import { RootState } from "./../store";
 import { AxiosResponse } from "axios";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { call, put, select, takeEvery } from "redux-saga/effects";
-import {
-  addBookmark,
-  fetchBookmark,
-  removeBookmark,
-} from "redux/slices/bookmark";
+import { addBookmark, fetchBookmark, removeBookmark } from "redux/slices/bookmark";
 import { loginSuccess } from "redux/slices/auth";
 import { BookmarkState } from "./../slices/bookmark";
 import userApi from "api/userApi";
@@ -40,7 +36,6 @@ function* addPostToBookmark(action: PayloadAction<string>) {
   try {
     let id: string = yield select((state: RootState) => state.bookmark.id);
     yield call(userApi.addBookmark, id, action.payload);
-    yield put(addBookmark(action.payload));
   } catch (err) {
     console.log(err);
   }
@@ -50,7 +45,6 @@ function* removePostFromBookmark(action: PayloadAction<string>) {
   try {
     let id: string = yield select((state: RootState) => state.bookmark.id);
     yield call(userApi.removeBookmark, id, action.payload);
-    yield put(removeBookmark(action.payload));
   } catch (err) {}
 }
 

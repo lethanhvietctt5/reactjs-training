@@ -1,46 +1,56 @@
-import {
-  Button,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  Stack,
-} from "@chakra-ui/react";
+import { Box, Button, Input, InputGroup, InputLeftElement, Stack, Text } from "@chakra-ui/react";
 import { HiOutlineMail } from "react-icons/hi";
 import { MdOutlinePassword } from "react-icons/md";
 import { Link, Navigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-
-import "./Login.scss";
-import { login } from "../redux/slices/auth";
-import { useAppDispatch, useAppSelector } from "../hooks";
-import useCustomToast from "hooks/useCustomToast";
 import { useEffect } from "react";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+import { login, setInit } from "redux/slices/auth";
+import { useAppDispatch, useAppSelector } from "hooks";
+import useCustomToast from "hooks/useCustomToast";
+import "./Login.scss";
 
 type InputType = {
   email: string;
   password: string;
 };
 
+const schema = yup
+  .object({
+    email: yup.string().email("Invalid email.").required("No email provided."),
+    password: yup
+      .string()
+      .required("No password provided.")
+      .min(6, "Password is too short - should be 6 chars minimum."),
+  })
+  .required();
+
 function Login() {
-  const { register, handleSubmit } = useForm<InputType>();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<InputType>({
+    resolver: yupResolver(schema),
+  });
+
   const auth = useAppSelector((state) => state.auth);
   const { toastError } = useCustomToast();
   const dispatch = useAppDispatch();
-  async function onSubmit(data: InputType) {
-    if (data.email.length === 0 || data.password.length === 0) {
-      toastError("Login failed! Please enter all field.");
-      return;
-    }
-
-    const { email, password } = data;
-    dispatch(login({ email, password }));
-  }
 
   useEffect(() => {
     if (auth.failed) {
       toastError("Login failed! Email or Password is wrong.");
+      dispatch(setInit());
     }
-  }, [auth.failed, toastError]);
+  }, [auth.failed, toastError, dispatch]);
+
+  async function onSubmit(data: InputType) {
+    const { email, password } = data;
+    dispatch(login({ email, password }));
+  }
 
   if (auth.currentUser.email) {
     return <Navigate to="/posts" />;
@@ -52,32 +62,42 @@ function Login() {
         <div className="login_card_title">Login</div>
         <div className="login_card_input">
           <Stack spacing={4}>
-            <InputGroup colorScheme={"teal"}>
-              <InputLeftElement
-                pointerEvents="none"
-                children={<HiOutlineMail color="gray.100" />}
-              />
-              <Input
-                {...register("email")}
-                type="email"
-                placeholder="Enter email"
-                focusBorderColor="green.200"
-              />
-            </InputGroup>
+            <Box>
+              <InputGroup colorScheme={"teal"}>
+                <InputLeftElement
+                  pointerEvents="none"
+                  children={<HiOutlineMail color="gray.100" />}
+                />
+                <Input
+                  {...register("email")}
+                  type="email"
+                  placeholder="Enter email"
+                  focusBorderColor="green.200"
+                />
+              </InputGroup>
+              <Text fontSize="sm" color="red" ml="2">
+                {errors.email?.message}
+              </Text>
+            </Box>
 
-            <InputGroup>
-              <InputLeftElement
-                pointerEvents="none"
-                fontSize="1.2em"
-                children={<MdOutlinePassword />}
-              />
-              <Input
-                {...register("password")}
-                type={"password"}
-                focusBorderColor="green.200"
-                placeholder="Enter password"
-              />
-            </InputGroup>
+            <Box>
+              <InputGroup>
+                <InputLeftElement
+                  pointerEvents="none"
+                  fontSize="1.2em"
+                  children={<MdOutlinePassword />}
+                />
+                <Input
+                  {...register("password")}
+                  type={"password"}
+                  focusBorderColor="green.200"
+                  placeholder="Enter password"
+                />
+              </InputGroup>
+              <Text fontSize="sm" color="red" ml="2">
+                {errors.password?.message}
+              </Text>
+            </Box>
           </Stack>
         </div>
         <div className="forgot_password_link">

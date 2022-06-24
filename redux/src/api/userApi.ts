@@ -6,7 +6,7 @@ const userApi = {
   },
   addBookmark: async (id: string, post_id: string) => {
     const res = await api.get("/bookmarks/" + id);
-    const bookmark: string[] = res.data[0].list_bookmark;
+    const bookmark: string[] = res.data.list_bookmark;
     bookmark.push(post_id);
     return await api.put("/bookmarks/" + id, {
       list_bookmark: bookmark,

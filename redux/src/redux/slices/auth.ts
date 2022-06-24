@@ -43,6 +43,16 @@ const authSlice = createSlice({
       state.logining = false;
       state.failed = true;
     },
+    setInit: (state) => {
+      state.logining = false;
+      state.failed = false;
+      state.currentUser = {
+        id: "",
+        name: "",
+        email: "",
+        password: "",
+      };
+    },
     logout: (state) => {
       state.currentUser.email = "";
       state.currentUser.name = "";
@@ -54,6 +64,6 @@ const authSlice = createSlice({
 
 const authReducer = authSlice.reducer;
 
-export const { login, loginSuccess, loginFailed, logout } = authSlice.actions;
+export const { login, loginSuccess, loginFailed, setInit, logout } = authSlice.actions;
 
 export default authReducer;

@@ -24,15 +24,16 @@ const bookmarkSlice = createSlice({
       state.bookmarks.push(action.payload);
     },
     removeBookmark: (state, action: PayloadAction<string>) => {
-      state.bookmarks = state.bookmarks.filter(
-        (item) => item !== action.payload
-      );
+      state.bookmarks = state.bookmarks.filter((item) => item !== action.payload);
+    },
+    resetBoomark: (state) => {
+      state.id = "";
+      state.bookmarks = [];
     },
   },
 });
 
 const bookmarkReducer = bookmarkSlice.reducer;
 
-export const { fetchBookmark, addBookmark, removeBookmark } =
-  bookmarkSlice.actions;
+export const { fetchBookmark, addBookmark, removeBookmark, resetBoomark } = bookmarkSlice.actions;
 export default bookmarkReducer;

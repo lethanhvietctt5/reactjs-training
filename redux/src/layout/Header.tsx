@@ -1,23 +1,16 @@
 import { EditIcon } from "@chakra-ui/icons";
-import {
-  Box,
-  Button,
-  ButtonGroup,
-  Flex,
-  Heading,
-  Icon,
-  Text,
-  Tooltip,
-} from "@chakra-ui/react";
+import { Box, Button, ButtonGroup, Flex, Heading, Icon, Text, Tooltip } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "hooks";
 import { logout } from "redux/slices/auth";
+import { resetBoomark } from "redux/slices/bookmark";
 
 function Header() {
   const auth = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
 
   function handleLogout() {
+    dispatch(resetBoomark());
     dispatch(logout());
   }
 
@@ -63,12 +56,7 @@ function Header() {
                   </Icon>
                 </Tooltip>
               </Link>
-              <Button
-                color="white"
-                backgroundColor="green.400"
-                size="md"
-                onClick={handleLogout}
-              >
+              <Button color="white" backgroundColor="green.400" size="md" onClick={handleLogout}>
                 Logout
               </Button>
             </Flex>
@@ -80,12 +68,7 @@ function Header() {
                 </Button>
               </Link>
               <Link to="/register">
-                <Button
-                  color="green.400"
-                  backgroundColor="white"
-                  size="md"
-                  variant="outline"
-                >
+                <Button color="green.400" backgroundColor="white" size="md" variant="outline">
                   Register
                 </Button>
               </Link>
