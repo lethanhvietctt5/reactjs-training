@@ -1,27 +1,9 @@
 import { Box, Grid } from "@chakra-ui/react";
-import postApi from "api/postApi";
 import BlogItem from "components/BlogItem";
-import { useAppSelector } from "hooks";
-import React, { useEffect, useState } from "react";
-import Post from "types/post";
+import useBookmark from "hooks/useBookmark";
 
 function Bookmark() {
-  const postIds = useAppSelector((state) => state.bookmark.bookmarks);
-  const [posts, setPosts] = useState<Post[]>([]);
-
-  useEffect(() => {
-    async function fetchBookmakPost() {
-      let posts: Post[] = [];
-      for await (let id of postIds) {
-        const res = await postApi.getPostById(id);
-        posts.push(res.data);
-      }
-
-      setPosts(posts);
-    }
-
-    fetchBookmakPost();
-  }, [postIds]);
+  const [posts] = useBookmark();
 
   return (
     <Box py="10">

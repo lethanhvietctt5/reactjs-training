@@ -12,13 +12,7 @@ function BlogItem({ post }: Props) {
 
   return (
     <Link to={`/${post.id}`}>
-      <Box
-        backgroundColor="white"
-        borderRadius="lg"
-        p="5"
-        cursor="pointer"
-        h="full"
-      >
+      <Box backgroundColor="white" borderRadius="lg" p="5" cursor="pointer" h="full">
         <Heading noOfLines={2} size="lg" fontWeight="900">
           {post.title}
         </Heading>

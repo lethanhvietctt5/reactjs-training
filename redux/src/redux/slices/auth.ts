@@ -34,10 +34,7 @@ const authSlice = createSlice({
     loginSuccess: (state, action: PayloadAction<User>) => {
       state.logining = false;
       state.failed = false;
-      state.currentUser.email = action.payload.email;
-      state.currentUser.name = action.payload.name;
-      state.currentUser.id = action.payload.id;
-      state.currentUser.password = "";
+      state.currentUser = action.payload;
     },
     loginFailed: (state) => {
       state.logining = false;
@@ -57,7 +54,6 @@ const authSlice = createSlice({
       state.currentUser.email = "";
       state.currentUser.name = "";
       state.currentUser.id = "";
-      state.currentUser.password = "";
     },
   },
 });

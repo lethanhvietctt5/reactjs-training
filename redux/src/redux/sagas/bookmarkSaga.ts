@@ -5,7 +5,7 @@ import { call, put, select, takeEvery } from "redux-saga/effects";
 import { addBookmark, fetchBookmark, removeBookmark } from "redux/slices/bookmark";
 import { loginSuccess } from "redux/slices/auth";
 import { BookmarkState } from "./../slices/bookmark";
-import userApi from "api/userApi";
+import userApi from "api/bookmarkApi";
 import User from "types/user";
 
 type BookmarkResponse = {
@@ -34,7 +34,7 @@ function* getBookmark(action: PayloadAction<User>) {
 
 function* addPostToBookmark(action: PayloadAction<string>) {
   try {
-    let id: string = yield select((state: RootState) => state.bookmark.id);
+    const id: string = yield select((state: RootState) => state.bookmark.id);
     yield call(userApi.addBookmark, id, action.payload);
   } catch (err) {
     console.log(err);
@@ -43,9 +43,11 @@ function* addPostToBookmark(action: PayloadAction<string>) {
 
 function* removePostFromBookmark(action: PayloadAction<string>) {
   try {
-    let id: string = yield select((state: RootState) => state.bookmark.id);
+    const id: string = yield select((state: RootState) => state.bookmark.id);
     yield call(userApi.removeBookmark, id, action.payload);
-  } catch (err) {}
+  } catch (err) {
+    console.log(err);
+  }
 }
 
 export default function* watcherBookmark() {

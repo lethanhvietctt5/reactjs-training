@@ -123,7 +123,7 @@ function EditPost() {
               <TagLabel>{tag}</TagLabel>
               <TagCloseButton
                 onClick={() => {
-                  let newTags = [...tags];
+                  const newTags = [...tags];
                   newTags.splice(index, 1);
                   setTags(newTags);
                 }}

@@ -1,7 +1,7 @@
 type Post = {
   id: string;
   author_id: string;
-  author_name: string | null;
+  author_name?: string;
   tags: string[];
   title: string;
   body: string;

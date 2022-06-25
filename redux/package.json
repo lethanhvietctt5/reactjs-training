@@ -18,8 +18,11 @@
     "@types/react-dom": "^18.0.0",
     "axios": "^0.27.2",
     "framer-motion": "^6",
+    "husky": "^8.0.1",
     "json-server": "^0.17.0",
+    "lint-staged": "^13.0.3",
     "nanoid": "^4.0.0",
+    "prettier": "^2.7.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.32.1",
@@ -38,7 +41,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "json-server --watch db.json --port 8000"
+    "server": "json-server --watch db.json --port 8000",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "eslintConfig": {
     "extends": [
@@ -56,6 +61,16 @@
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
+      "prettier --write"
     ]
   },
   "devDependencies": {

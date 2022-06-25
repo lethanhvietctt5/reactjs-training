@@ -1,66 +1,12 @@
 import { Avatar, Box, Flex, Grid } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import BlogItem from "../components/BlogItem";
-import api from "../api";
-import Post from "types/post";
-import User from "types/user";
 import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
-import { useSearchParams } from "react-router-dom";
+import BlogItem from "components/BlogItem";
+import usePosts from "hooks/usePosts";
+import usePagination from "hooks/usePagination";
 
 function Home() {
-  const [posts, setPosts] = useState([] as Post[]);
-  const [params, setParams] = useSearchParams();
-  const [page, setPage] = useState(1);
-  const limit = 8;
-  const [arrPages, setArrPages] = useState([1, 2, 3, 4, 5]);
-
-  useEffect(() => {
-    if (params.has("page")) {
-      setPage(parseInt(params.get("page") as string));
-    }
-  }, [params]);
-
-  useEffect(() => {
-    async function fetchAuthor(id: string) {
-      const data = await api.get(`/users/${id}`);
-      return data;
-    }
-
-    async function fetchPosts() {
-      try {
-        const res = await api.get(`/posts?_limit=${limit}&_page=${page}`);
-        if (res.data.length > 0) {
-          let posts: Post[] = res.data;
-          let authors: User[] = [];
-          for await (const post of posts) {
-            const author = await fetchAuthor(post.author_id);
-            authors.push(author.data);
-          }
-
-          posts = posts.map((post, index) => {
-            return {
-              ...post,
-              author_name: authors[index].name,
-            };
-          });
-
-          setPosts(posts);
-        }
-      } catch (err) {}
-    }
-
-    fetchPosts();
-  }, [page]);
-
-  useEffect(() => {
-    if (page > Math.max(...arrPages)) {
-      setArrPages(arrPages.map((num, index) => index + page));
-    }
-
-    if (page < Math.min(...arrPages) && page > 1) {
-      setArrPages(arrPages.map((num, index) => num - page));
-    }
-  }, [page, arrPages]);
+  const { currentPage, arrPages, changePage, nextPage, prevPage } = usePagination();
+  const posts = usePosts(currentPage);
 
   return (
     <Box py="10">
@@ -77,12 +23,10 @@ function Home() {
             bg: "green.300",
           }}
           icon={<ArrowLeftIcon p="1" color="gray.600" />}
-          onClick={() => {
-            if (page > 1) setParams({ page: String(page - 1) });
-          }}
+          onClick={prevPage}
         />
         {arrPages.map((num) =>
-          num === page ? (
+          num === currentPage ? (
             <Avatar
               key={num}
               bg="green.300"
@@ -98,7 +42,7 @@ function Home() {
                 bg: "green.300",
               }}
               icon={<Box color="gray.600">{num}</Box>}
-              onClick={() => setParams({ page: String(num) })}
+              onClick={() => changePage(num)}
             />
           )
         )}
@@ -109,7 +53,7 @@ function Home() {
             bg: "green.300",
           }}
           icon={<ArrowRightIcon p="1" color="gray.600" />}
-          onClick={() => setParams({ page: String(page + 1) })}
+          onClick={nextPage}
         />
       </Flex>
     </Box>

@@ -1,41 +1,28 @@
-import { Box, Button, Input, InputGroup, InputLeftElement, Stack, Text } from "@chakra-ui/react";
-import { HiOutlineMail } from "react-icons/hi";
-import { MdOutlinePassword } from "react-icons/md";
-import { Link, Navigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import { Button, Flex, Text } from "@chakra-ui/react";
 import { useEffect } from "react";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+import { Navigate } from "react-router-dom";
+import { object, SchemaOf, string } from "yup";
+import { Link } from "react-router-dom";
 
-import { login, setInit } from "redux/slices/auth";
+import Form from "components/Form";
+import FormInput from "components/FormInput";
 import { useAppDispatch, useAppSelector } from "hooks";
 import useCustomToast from "hooks/useCustomToast";
-import "./Login.scss";
+import { login, setInit } from "redux/slices/auth";
 
 type InputType = {
   email: string;
   password: string;
 };
 
-const schema = yup
-  .object({
-    email: yup.string().email("Invalid email.").required("No email provided."),
-    password: yup
-      .string()
-      .required("No password provided.")
-      .min(6, "Password is too short - should be 6 chars minimum."),
-  })
-  .required();
+const schema: SchemaOf<InputType> = object({
+  email: string().email("Invalid email.").required("No email provided."),
+  password: string()
+    .required("No password provided.")
+    .min(6, "Password is too short - should be 6 chars minimum."),
+}).required();
 
 function Login() {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<InputType>({
-    resolver: yupResolver(schema),
-  });
-
   const auth = useAppSelector((state) => state.auth);
   const { toastError } = useCustomToast();
   const dispatch = useAppDispatch();
@@ -57,69 +44,52 @@ function Login() {
   }
 
   return (
-    <div className="login">
-      <form className="login_card" onSubmit={handleSubmit(onSubmit)}>
-        <div className="login_card_title">Login</div>
-        <div className="login_card_input">
-          <Stack spacing={4}>
-            <Box>
-              <InputGroup colorScheme={"teal"}>
-                <InputLeftElement
-                  pointerEvents="none"
-                  children={<HiOutlineMail color="gray.100" />}
-                />
-                <Input
-                  {...register("email")}
-                  type="email"
-                  placeholder="Enter email"
-                  focusBorderColor="green.200"
-                />
-              </InputGroup>
-              <Text fontSize="sm" color="red" ml="2">
-                {errors.email?.message}
-              </Text>
-            </Box>
-
-            <Box>
-              <InputGroup>
-                <InputLeftElement
-                  pointerEvents="none"
-                  fontSize="1.2em"
-                  children={<MdOutlinePassword />}
-                />
-                <Input
-                  {...register("password")}
-                  type={"password"}
-                  focusBorderColor="green.200"
-                  placeholder="Enter password"
-                />
-              </InputGroup>
-              <Text fontSize="sm" color="red" ml="2">
-                {errors.password?.message}
-              </Text>
-            </Box>
-          </Stack>
-        </div>
-        <div className="forgot_password_link">
-          Forgot password ? <span className="link">Reset</span>
-        </div>
-        <Button
-          className="login_card_button"
-          type="submit"
-          color="white"
-          backgroundColor="green.400"
-          size="sm"
-        >
-          Login
-        </Button>
-        <div className="register_link">
-          Don't have an account?{" "}
-          <span className="link">
-            <Link to="/register">Register</Link>
-          </span>
-        </div>
-      </form>
-    </div>
+    <Flex bgColor="gray.200" h="100vh" align={"center"}>
+      <Flex
+        direction="column"
+        justify="center"
+        w="30%"
+        mx="auto"
+        bgColor="white"
+        px="10"
+        py="36"
+        rounded="xl"
+      >
+        <Form<InputType> schema={schema} onSubmit={onSubmit}>
+          <Text fontSize="6xl" textAlign="center" fontWeight="bold" mb="10">
+            Login
+          </Text>
+          <FormInput fieldName="email" type="email" />
+          <FormInput fieldName="password" type="password" />
+          <Flex ml="2" mb="6" mt="3" fontSize="16px">
+            <Text>Forgot password? </Text>{" "}
+            <Text color="green" ml="1">
+              {" "}
+              Reset
+            </Text>
+          </Flex>
+          <Flex w="full" justify="center">
+            <Button
+              type="submit"
+              color="white"
+              backgroundColor="green.400"
+              size="sm"
+              fontSize="xl"
+              py="5"
+              px="10"
+            >
+              Login
+            </Button>
+          </Flex>
+          <Flex justify="center" my="10">
+            Don't have an account?{" "}
+            <Text ml="1" color="green" fontSize="lg" className="link">
+              <Link to="/register">Register</Link>
+            </Text>
+          </Flex>
+        </Form>
+      </Flex>
+    </Flex>
   );
 }
 
