@@ -1,7 +1,7 @@
+import postApi from "api/postApi";
+import useAuthentication from "hooks/useAuthentication";
 import { useEffect, useState } from "react";
 import { Navigate, Outlet, useParams } from "react-router-dom";
-import { useAppSelector } from "hooks";
-import api from "api";
 import Post from "types/post";
 
 type Props = {
@@ -9,26 +9,25 @@ type Props = {
 };
 
 function AuthorRoute({ redirectPath }: Props) {
-  const auth = useAppSelector((state) => state.auth);
+  const { currentUser } = useAuthentication();
   const [loading, setLoading] = useState(true);
   const [post, setPost] = useState<Post | null>(null);
   const { post_id } = useParams();
 
   useEffect(() => {
-    async function fetchPost() {
-      const res = await api.get(`/posts/${post_id}`);
-      setPost(res.data);
-      setLoading(false);
+    if (post_id) {
+      postApi.getPostById(post_id).then((post) => {
+        setPost(post);
+        setLoading(false);
+      });
     }
-
-    fetchPost();
   }, [post_id]);
 
   if (loading) {
     return <div>Loading</div>;
   }
 
-  if (auth.currentUser.id !== post?.author_id && !loading)
+  if (currentUser && currentUser.id !== post?.author_id)
     return <Navigate to={redirectPath} replace />;
   return <Outlet />;
 }

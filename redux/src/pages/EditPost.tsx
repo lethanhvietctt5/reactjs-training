@@ -7,30 +7,25 @@ import {
   TagCloseButton,
   TagLabel,
   Text,
-  Textarea,
+  Textarea
 } from "@chakra-ui/react";
+import useCustomToast from "hooks/useCustomToast";
+import usePost from "hooks/usePost";
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { useAppSelector } from "hooks";
-import api from "api";
-import Post from "types/post";
-import useCustomToast from "hooks/useCustomToast";
 
 function EditPost() {
   const [tags, setTags] = useState<string[]>([]);
   const tagRef = useRef<HTMLInputElement>(null);
   const titleRef = useRef<HTMLInputElement>(null);
   const bodyRef = useRef<HTMLTextAreaElement>(null);
-  const auth = useAppSelector((state) => state.auth);
   const navigate = useNavigate();
   const { post_id } = useParams();
   const { toastSuccess } = useCustomToast();
-  const [post, setPost] = useState<Post | null>(null);
+  const { post, editPost } = usePost({ post_id: post_id });
 
   useEffect(() => {
-    async function fetchPost() {
-      const res = await api.get(`/posts/${post_id}`);
-      const post = res.data;
+    if (post) {
       setTags(post.tags);
       if (titleRef.current) {
         titleRef.current.value = post.title;
@@ -39,12 +34,8 @@ function EditPost() {
       if (bodyRef.current) {
         bodyRef.current.value = post.body;
       }
-
-      setPost(post);
     }
-
-    fetchPost();
-  }, [post_id]);
+  }, [post]);
 
   function addTag(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -55,30 +46,14 @@ function EditPost() {
   }
 
   async function handeEdit() {
-    await api.put("posts/" + post_id, {
-      id: post?.id,
-      author_id: auth.currentUser.id,
-      title: titleRef.current?.value,
-      body: bodyRef.current?.value,
-      tags: tags,
-      author_name: auth.currentUser.name,
-      created_at: post?.created_at,
-      updated_at: new Date().getTime(),
-    });
+    if (titleRef.current && bodyRef.current) {
+      editPost(titleRef.current.value, bodyRef.current.value, tags);
+    }
     toastSuccess("Edit have saved successful.");
-
     navigate("/posts");
   }
 
-  const arr_color = [
-    "orange",
-    "blue",
-    "green",
-    "yellow",
-    "red",
-    "purple",
-    "teal",
-  ];
+  const arr_color = ["orange", "blue", "green", "yellow", "red", "purple", "teal"];
 
   return (
     <Flex
@@ -93,11 +68,7 @@ function EditPost() {
     >
       <Box>
         <Text fontWeight={800}>Title : </Text>
-        <Input
-          ref={titleRef}
-          placeholder="Title of post"
-          focusBorderColor="green.200"
-        />
+        <Input ref={titleRef} placeholder="Title of post" focusBorderColor="green.200" />
       </Box>
       <Box>
         <Text fontWeight={800}>Content : </Text>

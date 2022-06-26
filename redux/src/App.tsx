@@ -14,6 +14,7 @@ import PostDetail from "pages/PostDetail";
 import AuthorRoute from "route/AuthorRoute";
 import EditPost from "pages/EditPost";
 import Bookmark from "pages/Bookmark";
+import AuthenticationProvider from "components/Authentication";
 
 const theme = extendTheme({
   fonts: {
@@ -27,26 +28,25 @@ function App() {
     <ChakraProvider theme={theme}>
       <Provider store={store}>
         <BrowserRouter>
-          <div className="App">
-            <Routes>
-              <Route path="/login" element={<Login />} />
-              <Route path="/register" element={<Register />} />
-              <Route path="/" element={<Layout />}>
-                <Route path="posts" element={<Home />} />
-                <Route element={<ProtectdRoute redirectPath="/login" />}>
-                  <Route path="create" element={<CreatePost />} />
-                  <Route path="bookmark" element={<Bookmark />} />
-                  <Route
-                    path="edit"
-                    element={<AuthorRoute redirectPath="/posts" />}
-                  >
-                    <Route path=":post_id" element={<EditPost />} />
+          <AuthenticationProvider>
+            <div className="App">
+              <Routes>
+                <Route path="/login" element={<Login />} />
+                <Route path="/register" element={<Register />} />
+                <Route path="/" element={<Layout />}>
+                  <Route path="posts" element={<Home />} />
+                  <Route element={<ProtectdRoute redirectPath="/login" />}>
+                    <Route path="create" element={<CreatePost />} />
+                    <Route path="bookmark" element={<Bookmark />} />
+                    <Route path="edit" element={<AuthorRoute redirectPath="/posts" />}>
+                      <Route path=":post_id" element={<EditPost />} />
+                    </Route>
                   </Route>
+                  <Route path=":post_id" element={<PostDetail />} />
                 </Route>
-                <Route path=":post_id" element={<PostDetail />} />
-              </Route>
-            </Routes>
-          </div>
+              </Routes>
+            </div>
+          </AuthenticationProvider>
         </BrowserRouter>
       </Provider>
     </ChakraProvider>

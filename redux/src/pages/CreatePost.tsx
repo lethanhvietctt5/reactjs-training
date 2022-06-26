@@ -9,16 +9,12 @@ import {
   Text,
   Textarea,
 } from "@chakra-ui/react";
-import { nanoid } from "nanoid";
-import React, { useRef, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
+import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
+import * as yup from "yup";
 
-import { useAppSelector } from "hooks";
-import api from "api";
-import useCustomToast from "hooks/useCustomToast";
+import usePost from "hooks/usePost";
 
 type InputType = {
   title: string;
@@ -35,9 +31,7 @@ const schema = yup
 function CreatePost() {
   const [tags, setTags] = useState<string[]>([]);
   const tagRef = useRef<HTMLInputElement>(null);
-  const auth = useAppSelector((state) => state.auth);
-  const navigate = useNavigate();
-  const { toastSuccess } = useCustomToast();
+  const { createNewPost } = usePost({});
 
   const {
     register,
@@ -64,20 +58,7 @@ function CreatePost() {
   }
 
   async function create(data: InputType) {
-    await api.post("posts", {
-      id: nanoid(),
-      author_id: auth.currentUser.id,
-      title: data.title,
-      body: data.content,
-      tags: tags,
-      author_name: auth.currentUser.name,
-      created_at: new Date().getTime(),
-      updated_at: new Date().getTime(),
-    });
-
-    toastSuccess("Created new post successful.");
-
-    navigate("/posts");
+    createNewPost(data.title, data.content, tags);
   }
 
   const arr_color = ["orange", "blue", "green", "yellow", "red", "purple", "teal"];

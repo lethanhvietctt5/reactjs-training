@@ -1,41 +1,30 @@
 import { TimeIcon } from "@chakra-ui/icons";
 import { Badge, Box, Flex, Heading, Text, Tooltip } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
 import { AiOutlineUser } from "react-icons/ai";
 import { FiEdit2 } from "react-icons/fi";
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
 import { addBookmark, removeBookmark } from "redux/slices/bookmark";
 import { useAppDispatch, useAppSelector } from "hooks";
-import Post from "types/post";
-import api from "api";
 import useCustomToast from "hooks/useCustomToast";
+import useAuthentication from "hooks/useAuthentication";
+import usePost from "hooks/usePost";
 
 function PostDetail() {
   const { post_id } = useParams();
-  const [post, setPost] = useState<Post | null>(null);
+  const { post } = usePost({ post_id: post_id });
   const { toastSuccess } = useCustomToast();
 
-  const auth = useAppSelector((state) => state.auth);
+  const { currentUser } = useAuthentication();
   const dispatch = useAppDispatch();
   const bookmarks = useAppSelector((state) => state.bookmark.bookmarks);
-
-  useEffect(() => {
-    async function fetchPost() {
-      const res = await api.get("/posts/" + post_id);
-      setPost(res.data);
-    }
-
-    fetchPost();
-  }, [post_id]);
 
   function handleBookmark(post_id: string) {
     if (bookmarks.includes(post_id)) {
       dispatch(removeBookmark(post_id));
       toastSuccess("Post has removed from bookmark.");
     } else {
-      if (auth.currentUser.email) {
+      if (currentUser) {
         dispatch(addBookmark(post_id));
         toastSuccess("Post has added to bookmark.");
       }
@@ -72,7 +61,7 @@ function PostDetail() {
             </Tooltip>
           )}
 
-          {post && auth.currentUser.id === post?.author_id && (
+          {post && currentUser?.id === post?.author_id && (
             <Tooltip shouldWrapChildren hasArrow label="Edit this post">
               <Link to={`/edit/${post.id}`}>
                 <FiEdit2 color="gray" cursor="pointer" size="25" />

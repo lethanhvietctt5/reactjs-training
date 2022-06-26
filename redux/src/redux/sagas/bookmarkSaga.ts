@@ -3,7 +3,6 @@ import { AxiosResponse } from "axios";
 import { PayloadAction } from "@reduxjs/toolkit";
 import { call, put, select, takeEvery } from "redux-saga/effects";
 import { addBookmark, fetchBookmark, removeBookmark } from "redux/slices/bookmark";
-import { loginSuccess } from "redux/slices/auth";
 import { BookmarkState } from "./../slices/bookmark";
 import userApi from "api/bookmarkApi";
 import User from "types/user";
@@ -52,7 +51,7 @@ function* removePostFromBookmark(action: PayloadAction<string>) {
 
 export default function* watcherBookmark() {
   // Watch if login success then fetch bookmark of current user
-  yield takeEvery(loginSuccess.type, getBookmark);
+  // yield takeEvery(loginSuccess.type, getBookmark);
 
   // Watch when user add new post to bookmark
   yield takeEvery(addBookmark.type, addPostToBookmark);

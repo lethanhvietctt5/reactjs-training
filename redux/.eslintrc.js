@@ -24,6 +24,7 @@ module.exports = {
     "array-callback-return": "warn",
     "consistent-return": "warn",
     "default-case": "warn",
+    "no-duplicate-imports": "error",
     // etc.
   },
   overrides: [

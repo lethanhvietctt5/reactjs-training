@@ -1,17 +1,17 @@
 import { EditIcon } from "@chakra-ui/icons";
 import { Box, Button, ButtonGroup, Flex, Heading, Icon, Text, Tooltip } from "@chakra-ui/react";
+import { useAppDispatch } from "hooks";
+import useAuthentication from "hooks/useAuthentication";
 import { Link } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "hooks";
-import { logout } from "redux/slices/auth";
 import { resetBoomark } from "redux/slices/bookmark";
 
 function Header() {
-  const auth = useAppSelector((state) => state.auth);
+  const { logout, currentUser } = useAuthentication();
   const dispatch = useAppDispatch();
 
   function handleLogout() {
+    logout();
     dispatch(resetBoomark());
-    dispatch(logout());
   }
 
   return (
@@ -32,7 +32,7 @@ function Header() {
               <Text fontWeight="black">Blogs</Text>
             </Link>
           </Heading>
-          {auth.currentUser.email ? (
+          {currentUser ? (
             <Flex align="center" gap="4">
               <Link to="/create">
                 <Tooltip hasArrow label="Create new post">

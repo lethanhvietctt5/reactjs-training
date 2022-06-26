@@ -1,14 +1,10 @@
 import { Button, Flex, Text } from "@chakra-ui/react";
-import { useEffect } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, Link } from "react-router-dom";
 import { object, SchemaOf, string } from "yup";
-import { Link } from "react-router-dom";
 
 import Form from "components/Form";
 import FormInput from "components/FormInput";
-import { useAppDispatch, useAppSelector } from "hooks";
-import useCustomToast from "hooks/useCustomToast";
-import { login, setInit } from "redux/slices/auth";
+import useAuthentication from "hooks/useAuthentication";
 
 type InputType = {
   email: string;
@@ -23,23 +19,14 @@ const schema: SchemaOf<InputType> = object({
 }).required();
 
 function Login() {
-  const auth = useAppSelector((state) => state.auth);
-  const { toastError } = useCustomToast();
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    if (auth.failed) {
-      toastError("Login failed! Email or Password is wrong.");
-      dispatch(setInit());
-    }
-  }, [auth.failed, toastError, dispatch]);
+  const { currentUser, login } = useAuthentication();
 
   async function onSubmit(data: InputType) {
     const { email, password } = data;
-    dispatch(login({ email, password }));
+    login(email, password);
   }
 
-  if (auth.currentUser.email) {
+  if (currentUser) {
     return <Navigate to="/posts" />;
   }
 
@@ -55,7 +42,7 @@ function Login() {
         py="36"
         rounded="xl"
       >
-        <Form<InputType> schema={schema} onSubmit={onSubmit}>
+        <Form schema={schema} onSubmit={onSubmit}>
           <Text fontSize="6xl" textAlign="center" fontWeight="bold" mb="10">
             Login
           </Text>
