@@ -3,8 +3,10 @@ import { useSearchParams } from "react-router-dom";
 
 function usePagination() {
   const [params, setParams] = useSearchParams();
-  const [currentPage, setCurrentPage] = useState(parseInt(params.get("page") as string) ?? 1);
   const [arrPages, setArrPages] = useState([1, 2, 3, 4, 5]);
+  const [currentPage, setCurrentPage] = useState(
+    parseInt(params.get("page") as string) ? parseInt(params.get("page") as string) : 1
+  );
 
   useEffect(() => {
     if (params.has("page")) {

@@ -1,24 +1,16 @@
 import { Box, Button, Flex, Input, Tag, TagCloseButton, TagLabel, Text } from "@chakra-ui/react";
-import { useRef, useState } from "react";
 
 import Form from "components/Form";
 import FormInput from "components/FormInput";
 import { TAG_COLORS } from "constants/colors";
 import { POST_SCHEMA } from "constants/schemas";
 import usePost from "hooks/usePost";
+import useTags from "hooks/useTags";
 import FormInputValues from "types/formInput";
 
 function CreatePost() {
-  const [tags, setTags] = useState<string[]>([]);
-  const tagRef = useRef<HTMLInputElement>(null);
+  const { tags, tagRef, addTag, setTags } = useTags();
   const { createNewPost } = usePost({});
-
-  function addTag() {
-    if (tagRef.current && tagRef.current?.value.length > 0) {
-      setTags([...tags, tagRef.current.value]);
-      tagRef.current.value = "";
-    }
-  }
 
   function onSubmit(data: FormInputValues) {
     const { title, content } = data;

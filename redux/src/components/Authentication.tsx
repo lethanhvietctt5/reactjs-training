@@ -33,7 +33,7 @@ const AuthenticationProvider = ({ children }: AuthenticationProviderProps) => {
       if (user) {
         setCurrentUser(user);
         setFailed(false);
-        navigate("/posts");
+        navigate("/");
       } else {
         setFailed(true);
         toastError("Login failed! Email or Password is wrong.");

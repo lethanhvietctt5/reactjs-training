@@ -35,12 +35,12 @@
     {
       "id": "83238",
       "author_id": "gD7vpprRCBZTD83wBopw0",
-      "title": "Tìm hiểu về Socket.io ",
+      "title": "Tìm hiểu về Socket.io",
       "content": "Socket.io được tạo vào năm 2010. Nó được phát triển để tạo kết nối mở cho giao tiếp với thời gian thực, và là một hiện tượng vào thời điểm đó. Socket.io cho phép giao tiếp hai chiều giữa client và server. Giao tiếp hai chiều được kích hoạt khi client có socket.io trên trình duyệt và server cũng có tích hợp với socket.io. Dữ liệu được gửi có thể ở nhiều định dạng, đơn giản nhất là dùng JSON. Để thiết lập kết nối, và thay đổi dữ liệu giữa client và server, socket.io sử dụng engine.io. Đây là một triển khai thấp hơn ở bên trong nó. Engine.io được dữ dụng cho triển khai phía server và engine.io-client được dùng cho client.",
       "tags": ["socket", "web-rtc", "react"],
       "author_name": "Le Thanh Viet",
       "created_at": 1655367688211,
-      "updated_at": 1655540747445
+      "updated_at": 1656317167861
     },
     {
       "id": "83239",

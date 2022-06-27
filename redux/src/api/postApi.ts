@@ -38,7 +38,10 @@ const postApi = {
       updated_at: new Date().getTime(),
     });
   },
-  getPosts: async function (limit?: number, page?: number): Promise<Post[]> {
+  getPosts: async function (
+    limit?: number,
+    page?: number
+  ): Promise<{ posts: Post[]; total: number }> {
     let url = "/posts";
     if (limit && page) {
       url += limit ? `?_limit=${limit}` : "";
@@ -46,7 +49,11 @@ const postApi = {
     }
 
     const res = await api.get<Post[]>(url);
-    return res.data;
+    const totalRecord = parseInt(res.headers["x-total-count"]);
+    return {
+      posts: res.data,
+      total: totalRecord ? totalRecord : 0,
+    };
   },
 };
 

@@ -40,10 +40,10 @@ function usePost({ post_id }: PostProps) {
     if (currentUser && post) {
       try {
         await postApi.editPost(post, title, content, tags);
-        toastSuccess("Created new post successful.");
+        toastSuccess("Edited post successful.");
         navigate("/posts");
       } catch (err) {
-        toastError("Failed to create new post.");
+        toastError("Failed to edit post.");
       }
     }
   }

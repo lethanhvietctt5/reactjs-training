@@ -9,11 +9,13 @@ type FormProps = {
   children: React.ReactNode;
   schema: AnyObjectSchema;
   onSubmit: (data: FormInputValues) => void;
+  defaultValues?: FormInputValues;
 };
 
-function Form({ children, schema, onSubmit }: FormProps) {
+function Form({ children, schema, onSubmit, defaultValues }: FormProps) {
   const methods = useForm<FormInputValues>({
     resolver: yupResolver(schema),
+    defaultValues,
   });
 
   return (

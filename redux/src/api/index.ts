@@ -19,6 +19,7 @@ api.interceptors.response.use(
     return {
       data: response.data,
       status: response.status,
+      headers: response.headers,
     };
   },
   function (error) {

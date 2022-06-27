@@ -1,61 +1,26 @@
-import { Avatar, Box, Flex, Grid } from "@chakra-ui/react";
-import { ArrowLeftIcon, ArrowRightIcon } from "@chakra-ui/icons";
-import BlogItem from "components/BlogItem";
+import { ArrowRightIcon } from "@chakra-ui/icons";
+import { Box, Flex } from "@chakra-ui/react";
+import ListPosts from "components/ListPosts";
+import Loading from "components/Loading";
+import SomethingWrong from "components/SomethingWrong";
 import usePosts from "hooks/usePosts";
-import usePagination from "hooks/usePagination";
+import { Link } from "react-router-dom";
 
 function Home() {
-  const { currentPage, arrPages, changePage, nextPage, prevPage } = usePagination();
-  const posts = usePosts(currentPage);
+  const { posts, fetching, failed } = usePosts(1);
+
+  if (fetching) return <Loading />;
+  if (failed) return <SomethingWrong message="Some errors occured when fetching posts" />;
 
   return (
     <Box py="10">
-      <Grid templateColumns="repeat(4,1fr)" gap="6">
-        {posts.map((post, index) => (
-          <BlogItem key={index} post={post} />
-        ))}
-      </Grid>
-      <Flex justify="center" mt="5" gap="3">
-        <Avatar
-          bg="gray.300"
-          cursor="pointer"
-          _hover={{
-            bg: "green.300",
-          }}
-          icon={<ArrowLeftIcon p="1" color="gray.600" />}
-          onClick={prevPage}
-        />
-        {arrPages.map((num) =>
-          num === currentPage ? (
-            <Avatar
-              key={num}
-              bg="green.300"
-              cursor="pointer"
-              icon={<Box color="gray.600">{num}</Box>}
-            />
-          ) : (
-            <Avatar
-              key={num}
-              bg="gray.300"
-              cursor="pointer"
-              _hover={{
-                bg: "green.300",
-              }}
-              icon={<Box color="gray.600">{num}</Box>}
-              onClick={() => changePage(num)}
-            />
-          )
-        )}
-        <Avatar
-          bg="gray.300"
-          cursor="pointer"
-          _hover={{
-            bg: "green.300",
-          }}
-          icon={<ArrowRightIcon p="1" color="gray.600" />}
-          onClick={nextPage}
-        />
-      </Flex>
+      <ListPosts posts={posts} />
+      <Link to="/posts">
+        <Flex justify="center" align="center" gap="2" mt="5" color="green.500">
+          See all
+          <ArrowRightIcon />
+        </Flex>
+      </Link>
     </Box>
   );
 }

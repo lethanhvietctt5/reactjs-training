@@ -47,8 +47,13 @@ function Register() {
               Register
             </Text>
             <Box w="full">
+              <Text fontWeight="bold">Email</Text>
               <FormInput type="email" name="email" placeHolder="abc@gmail.com" />
-              <FormInput type="name" name="name" placeHolder="Nguyen Van A" />
+
+              <Text fontWeight="bold">Name</Text>
+              <FormInput type="text" name="name" placeHolder="Nguyen Van A" />
+
+              <Text fontWeight="bold">Password</Text>
               <FormInput type="password" name="password" placeHolder="********" />
             </Box>
             <Button

@@ -1,44 +1,31 @@
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { Box, Button, Flex, Input, Tag, TagCloseButton, TagLabel, Text } from "@chakra-ui/react";
 import Form from "components/Form";
 import FormInput from "components/FormInput";
 import Loading from "components/Loading";
 import { TAG_COLORS } from "constants/colors";
 import { POST_SCHEMA } from "constants/schemas";
-import useCustomToast from "hooks/useCustomToast";
 import usePost from "hooks/usePost";
-import React, { useEffect, useRef, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import useTags from "hooks/useTags";
 import FormInputValues from "types/formInput";
 
 function EditPost() {
-  const [tags, setTags] = useState<string[]>([]);
-  const tagRef = useRef<HTMLInputElement>(null);
-  const navigate = useNavigate();
   const { post_id } = useParams();
-  const { toastSuccess } = useCustomToast();
   const { post, editPost } = usePost({ post_id: post_id });
+  const { tags, tagRef, addTag, setTags } = useTags();
 
   useEffect(() => {
     if (post) {
       setTags(post.tags);
     }
-  }, [post]);
-
-  function addTag(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    if (tagRef.current && tagRef.current?.value.length > 0) {
-      setTags([...tags, tagRef.current.value]);
-      tagRef.current.value = "";
-    }
-  }
+  }, [post, setTags]);
 
   function onSubmit(data: FormInputValues) {
     const { title, content } = data;
     if (title && content) {
       editPost(title, content, tags);
     }
-    toastSuccess("Edit have saved successful.");
-    navigate("/posts");
   }
 
   if (typeof post === "undefined") {
@@ -46,7 +33,11 @@ function EditPost() {
   }
 
   return (
-    <Form onSubmit={onSubmit} schema={POST_SCHEMA}>
+    <Form
+      onSubmit={onSubmit}
+      schema={POST_SCHEMA}
+      defaultValues={{ title: post.title, content: post.content }}
+    >
       <Flex
         direction="column"
         backgroundColor="white"
@@ -63,7 +54,7 @@ function EditPost() {
             name="title"
             type="text"
             defaultValue={post?.title}
-            // placeHolder="Title of post"
+            placeHolder="Title of post"
           />
         </Box>
         <Box>
@@ -72,7 +63,7 @@ function EditPost() {
             name="content"
             type="textarea"
             defaultValue={post?.content}
-            placeHolder="Title of post"
+            placeHolder="Content of post"
           />
         </Box>
         <Box>
@@ -98,13 +89,16 @@ function EditPost() {
               </Tag>
             ))}
           </Text>
-          <form onSubmit={addTag}>
+          <Flex>
             <Input
               ref={tagRef}
               placeholder="ex. javascript, react, nodejs"
               focusBorderColor="green.200"
             />
-          </form>
+            <Button colorScheme="green" variant="outline" ml="2" onClick={addTag}>
+              Add
+            </Button>
+          </Flex>
         </Box>
 
         <Button colorScheme="green" type="submit">

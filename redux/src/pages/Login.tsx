@@ -18,7 +18,7 @@ function Login() {
   }
 
   if (currentUser) {
-    return <Navigate to="/posts" />;
+    return <Navigate to="/" />;
   }
 
   return (
