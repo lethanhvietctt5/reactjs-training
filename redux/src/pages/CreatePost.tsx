@@ -10,7 +10,7 @@ import FormInputValues from "types/formInput";
 
 function CreatePost() {
   const { tags, tagRef, addTag, setTags } = useTags();
-  const { createNewPost } = usePost({});
+  const { createNewPost } = usePost();
 
   function onSubmit(data: FormInputValues) {
     const { title, content } = data;
@@ -45,7 +45,7 @@ function CreatePost() {
                 key={index}
                 borderRadius="md"
                 variant="solid"
-                colorScheme={TAG_COLORS[index % TAG_COLORS.length]}
+                bgColor={TAG_COLORS[index % TAG_COLORS.length]}
                 mr="3"
                 mb="2"
               >

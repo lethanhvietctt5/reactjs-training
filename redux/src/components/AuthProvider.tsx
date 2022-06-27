@@ -1,27 +1,17 @@
 import authApi from "api/authApi";
+import { AuthContext } from "context/auth";
 import { useAppDispatch } from "hooks";
 import useCustomToast from "hooks/useCustomToast";
-import React, { createContext, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { fetchBookmark } from "redux/slices/bookmark";
-import Authentication from "types/authentication";
+import { fetchBookmark, resetBoomark } from "redux/slices/bookmark";
 import User from "types/user";
 
-const initAuthCtxValue: Authentication = {
-  logining: false,
-  failed: false,
-  currentUser: undefined,
-  login: () => void 0,
-  logout: () => void 0,
-};
-
-export const AuthContext = createContext<Authentication>(initAuthCtxValue);
-
-type AuthenticationProviderProps = {
+type AuthProviderProps = {
   children: React.ReactNode;
 };
 
-const AuthenticationProvider = ({ children }: AuthenticationProviderProps) => {
+const AuthProvider = ({ children }: AuthProviderProps) => {
   const [logining, setLogining] = useState<boolean>(false);
   const [failed, setFailed] = useState<boolean>(false);
   const [currentUser, setCurrentUser] = useState<User | undefined>(undefined);
@@ -47,6 +37,7 @@ const AuthenticationProvider = ({ children }: AuthenticationProviderProps) => {
 
   function logout() {
     setCurrentUser(undefined);
+    dispatch(resetBoomark());
   }
 
   const ctxValue = {
@@ -60,4 +51,4 @@ const AuthenticationProvider = ({ children }: AuthenticationProviderProps) => {
   return <AuthContext.Provider value={ctxValue}>{children}</AuthContext.Provider>;
 };
 
-export default AuthenticationProvider;
+export default AuthProvider;

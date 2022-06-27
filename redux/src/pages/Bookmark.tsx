@@ -1,9 +1,9 @@
 import { Box, Grid } from "@chakra-ui/react";
 import BlogItem from "components/BlogItem";
-import useBookmark from "hooks/useBookmark";
+import useBookmarkPosts from "hooks/useBookmarkPosts";
 
 function Bookmark() {
-  const [posts] = useBookmark();
+  const [posts] = useBookmarkPosts();
 
   return (
     <Box py="10">

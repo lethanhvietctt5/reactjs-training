@@ -1,12 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./index.scss";
-import App from "./App";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-import AuthenticationProvider from "components/Authentication";
+
 import store from "redux/store";
+import AuthProvider from "components/AuthProvider";
+import App from "./App";
+import "./index.scss";
 
 const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
@@ -22,9 +23,9 @@ root.render(
     <ChakraProvider theme={theme}>
       <Provider store={store}>
         <BrowserRouter>
-          <AuthenticationProvider>
+          <AuthProvider>
             <App />
-          </AuthenticationProvider>
+          </AuthProvider>
         </BrowserRouter>
       </Provider>
     </ChakraProvider>

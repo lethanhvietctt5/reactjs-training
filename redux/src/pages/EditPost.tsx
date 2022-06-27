@@ -12,7 +12,7 @@ import FormInputValues from "types/formInput";
 
 function EditPost() {
   const { post_id } = useParams();
-  const { post, editPost } = usePost({ post_id: post_id });
+  const { post, editPost } = usePost(post_id);
   const { tags, tagRef, addTag, setTags } = useTags();
 
   useEffect(() => {
@@ -74,7 +74,7 @@ function EditPost() {
                 key={index}
                 borderRadius="md"
                 variant="solid"
-                colorScheme={TAG_COLORS[index % TAG_COLORS.length]}
+                bgColor={TAG_COLORS[index % TAG_COLORS.length]}
                 mr="3"
                 mb="2"
               >

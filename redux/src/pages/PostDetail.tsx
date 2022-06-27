@@ -1,37 +1,19 @@
 import { TimeIcon } from "@chakra-ui/icons";
 import { Badge, Box, Flex, Heading, Text, Tooltip } from "@chakra-ui/react";
-import { AiOutlineUser } from "react-icons/ai";
-import { FiEdit2 } from "react-icons/fi";
-import { useParams, Link } from "react-router-dom";
-import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
-import { addBookmark, removeBookmark } from "redux/slices/bookmark";
-import { useAppDispatch, useAppSelector } from "hooks";
-import useCustomToast from "hooks/useCustomToast";
+import { TAG_COLORS } from "constants/colors";
 import useAuthentication from "hooks/useAuthentication";
+import useBookmark from "hooks/useBookmark";
 import usePost from "hooks/usePost";
+import { AiOutlineUser } from "react-icons/ai";
+import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
+import { FiEdit2 } from "react-icons/fi";
+import { Link, useParams } from "react-router-dom";
 
 function PostDetail() {
   const { post_id } = useParams();
-  const { post } = usePost({ post_id: post_id });
-  const { toastSuccess } = useCustomToast();
-
+  const { post } = usePost(post_id);
   const { currentUser } = useAuthentication();
-  const dispatch = useAppDispatch();
-  const bookmarks = useAppSelector((state) => state.bookmark.collections);
-
-  function handleBookmark(post_id: string) {
-    if (bookmarks.includes(post_id)) {
-      dispatch(removeBookmark(post_id));
-      toastSuccess("Post has removed from bookmark.");
-    } else {
-      if (currentUser) {
-        dispatch(addBookmark(post_id));
-        toastSuccess("Post has added to bookmark.");
-      }
-    }
-  }
-
-  const arr_color = ["orange.400", "blue.400", "green.400", "yellow.400"];
+  const { bookmarks, handleBookmark } = useBookmark();
 
   return (
     <Box w="80%" mx="auto" py="10" px="20" my="10" minH="80vh" backgroundColor="white" rounded="md">
@@ -76,7 +58,7 @@ function PostDetail() {
             key={index}
             my="1"
             mr="1"
-            backgroundColor={arr_color[index % arr_color.length]}
+            backgroundColor={TAG_COLORS[index % TAG_COLORS.length]}
             color="white"
           >
             {tag}

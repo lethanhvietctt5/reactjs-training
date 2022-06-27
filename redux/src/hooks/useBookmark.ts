@@ -1,26 +1,26 @@
-import postApi from "api/postApi";
-import { useAppSelector } from "hooks";
-import { useEffect, useState } from "react";
-import Post from "types/post";
+import { useAppDispatch, useAppSelector } from "hooks";
+import { addBookmark, removeBookmark } from "redux/slices/bookmark";
+import useAuthentication from "./useAuthentication";
+import useCustomToast from "./useCustomToast";
 
 function useBookmark() {
-  const postIds = useAppSelector((state) => state.bookmark.collections);
-  const [posts, setPosts] = useState<Post[]>([]);
+  const dispatch = useAppDispatch();
+  const bookmarks = useAppSelector((state) => state.bookmark.collections);
+  const { toastSuccess } = useCustomToast();
+  const { currentUser } = useAuthentication();
 
-  useEffect(() => {
-    async function fetchBookmakPost() {
-      const posts: Post[] = [];
-      for (const id of postIds) {
-        const post = await postApi.getPostById(id);
-        posts.push(post);
+  function handleBookmark(post_id: string) {
+    if (bookmarks.includes(post_id)) {
+      dispatch(removeBookmark(post_id));
+      toastSuccess("Post has removed from bookmark.");
+    } else {
+      if (currentUser) {
+        dispatch(addBookmark(post_id));
+        toastSuccess("Post has added to bookmark.");
       }
-
-      setPosts(posts);
     }
-
-    fetchBookmakPost();
-  }, [postIds]);
-  return [posts];
+  }
+  return { bookmarks, handleBookmark };
 }
 
 export default useBookmark;

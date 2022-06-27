@@ -5,11 +5,7 @@ import Post from "types/post";
 import useAuthentication from "./useAuthentication";
 import useCustomToast from "./useCustomToast";
 
-type PostProps = {
-  post_id?: string;
-};
-
-function usePost({ post_id }: PostProps) {
+function usePost(post_id?: string) {
   const [post, setPost] = useState<Post | undefined>(undefined);
   const { currentUser } = useAuthentication();
   const { toastSuccess, toastError } = useCustomToast();

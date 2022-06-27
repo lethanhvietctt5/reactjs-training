@@ -1,5 +1,6 @@
 import { TimeIcon } from "@chakra-ui/icons";
 import { Badge, Box, Flex, Heading, Text } from "@chakra-ui/react";
+import { TAG_COLORS } from "constants/colors";
 import { Link } from "react-router-dom";
 import Post from "types/post";
 
@@ -8,8 +9,6 @@ type Props = {
 };
 
 function BlogItem({ post }: Props) {
-  const arr_color = ["orange.400", "blue.400", "green.400", "yellow.400"];
-
   return (
     <Link to={`/posts/${post.id}`}>
       <Box backgroundColor="white" borderRadius="lg" p="5" cursor="pointer" h="full">
@@ -22,7 +21,7 @@ function BlogItem({ post }: Props) {
               key={index}
               my="1"
               mr="1"
-              backgroundColor={arr_color[index % arr_color.length]}
+              bgColor={TAG_COLORS[index % TAG_COLORS.length]}
               color="white"
             >
               {tag}
