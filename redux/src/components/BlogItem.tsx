@@ -41,7 +41,7 @@ function BlogItem({ post }: Props) {
           </Flex>
         </Flex>
         <Text fontSize="sm" noOfLines={4}>
-          {post.body}
+          {post.content}
         </Text>
       </Box>
     </Link>

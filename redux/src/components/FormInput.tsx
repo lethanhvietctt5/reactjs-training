@@ -1,32 +1,49 @@
-import { Box, Input, InputGroup, InputLeftElement, Text } from "@chakra-ui/react";
-import { FieldError, FieldValues, UseFormRegister } from "react-hook-form";
-import { HiOutlineMail } from "react-icons/hi";
+import { Box, Input, Text, Textarea } from "@chakra-ui/react";
+import { ErrorMessage } from "@hookform/error-message";
+import { useController, UseControllerProps } from "react-hook-form";
+import FormInputValues from "types/formInput";
 
 type FormInputProps = {
-  register?: UseFormRegister<FieldValues>;
-  errors?: {
-    [x: string]: FieldError | undefined;
-  };
-  fieldName: string;
   type: string;
-  classname?: string;
-};
+  placeHolder?: string;
+  defaultValue?: string | number;
+} & UseControllerProps<FormInputValues>;
 
-function FormInput({ register, errors, fieldName, type, classname }: FormInputProps) {
+function FormInput({ type, placeHolder, defaultValue, ...props }: FormInputProps) {
+  const {
+    field,
+    formState: { errors },
+  } = useController<FormInputValues>(props);
+
   return (
-    <Box className={classname} my="2" mx="2">
-      <InputGroup colorScheme={"teal"}>
-        <InputLeftElement pointerEvents="none" children={<HiOutlineMail color="gray.100" />} />
+    <Box mb="3">
+      {type === "textarea" ? (
+        <Textarea
+          {...field}
+          placeholder="Content for your post"
+          focusBorderColor="green.200"
+          defaultValue={defaultValue}
+          h="40"
+        />
+      ) : (
         <Input
-          {...(register ? { ...register(fieldName) } : null)}
+          {...field}
           type={type}
-          placeholder="Enter email"
+          placeholder={placeHolder}
+          defaultValue={defaultValue}
           focusBorderColor="green.200"
         />
-      </InputGroup>
-      <Text fontSize="sm" color="red" ml="2">
-        {errors ? errors[fieldName]?.message : ""}
-      </Text>
+      )}
+
+      <ErrorMessage
+        errors={errors}
+        name={props.name}
+        render={({ message }) => (
+          <Text fontSize="sm" color="red" ml="2">
+            {message}
+          </Text>
+        )}
+      />
     </Box>
   );
 }

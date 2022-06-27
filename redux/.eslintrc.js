@@ -25,6 +25,7 @@ module.exports = {
     "consistent-return": "warn",
     "default-case": "warn",
     "no-duplicate-imports": "error",
+    "require-await": "error",
     // etc.
   },
   overrides: [

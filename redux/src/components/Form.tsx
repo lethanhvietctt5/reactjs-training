@@ -1,37 +1,27 @@
-import { yupResolver } from "@hookform/resolvers/yup";
 import React from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { FormProvider, useForm } from "react-hook-form";
 import { AnyObjectSchema } from "yup";
-import FormInput from "./FormInput";
+import FormInputValues from "types/formInput";
+import { Box } from "@chakra-ui/react";
 
-type FormProps<T> = {
+type FormProps = {
+  children: React.ReactNode;
   schema: AnyObjectSchema;
-  onSubmit: SubmitHandler<T>;
-  classname?: string;
-  children: React.ReactNode | React.ReactNode[];
+  onSubmit: (data: FormInputValues) => void;
 };
 
-function Form<T>({ schema, onSubmit, children, classname }: FormProps<T>) {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<T>({
+function Form({ children, schema, onSubmit }: FormProps) {
+  const methods = useForm<FormInputValues>({
     resolver: yupResolver(schema),
   });
 
   return (
-    <form className={classname} onSubmit={handleSubmit(onSubmit)}>
-      {Array.isArray(children)
-        ? children.map((child: React.ReactNode, idx) => {
-            if (React.isValidElement(child)) {
-              if (child.type === React.createElement(FormInput).type)
-                return React.cloneElement(child, { register, errors });
-              return child;
-            } else return child;
-          })
-        : children}
-    </form>
+    <FormProvider {...methods}>
+      <Box w="full">
+        <form onSubmit={methods.handleSubmit(onSubmit)}>{children}</form>
+      </Box>
+    </FormProvider>
   );
 }
 

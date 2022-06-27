@@ -97,7 +97,7 @@ function PostDetail() {
         Author <Text color="green">{post?.author_name}</Text>
       </Flex>
 
-      <Text>{post?.body}</Text>
+      <Text>{post?.content}</Text>
     </Box>
   );
 }

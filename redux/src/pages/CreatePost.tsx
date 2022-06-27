@@ -1,75 +1,32 @@
-import {
-  Box,
-  Button,
-  Flex,
-  Input,
-  Tag,
-  TagCloseButton,
-  TagLabel,
-  Text,
-  Textarea,
-} from "@chakra-ui/react";
-import { yupResolver } from "@hookform/resolvers/yup";
-import React, { useRef, useState } from "react";
-import { useForm } from "react-hook-form";
-import * as yup from "yup";
+import { Box, Button, Flex, Input, Tag, TagCloseButton, TagLabel, Text } from "@chakra-ui/react";
+import { useRef, useState } from "react";
 
+import Form from "components/Form";
+import FormInput from "components/FormInput";
+import { TAG_COLORS } from "constants/colors";
+import { POST_SCHEMA } from "constants/schemas";
 import usePost from "hooks/usePost";
-
-type InputType = {
-  title: string;
-  content: string;
-};
-
-const schema = yup
-  .object({
-    title: yup.string().required("Post's title is required"),
-    content: yup.string().required("Post's content is required"),
-  })
-  .required();
+import FormInputValues from "types/formInput";
 
 function CreatePost() {
   const [tags, setTags] = useState<string[]>([]);
   const tagRef = useRef<HTMLInputElement>(null);
   const { createNewPost } = usePost({});
 
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<InputType>({
-    resolver: yupResolver(schema),
-  });
-
-  function addTag(e: React.KeyboardEvent<HTMLInputElement>) {
-    // e.preventDefault();
-    if (e.key === "Enter") {
-      if (tagRef.current && tagRef.current?.value.length > 0) {
-        setTags([...tags, tagRef.current.value]);
-        tagRef.current.value = "";
-      }
+  function addTag() {
+    if (tagRef.current && tagRef.current?.value.length > 0) {
+      setTags([...tags, tagRef.current.value]);
+      tagRef.current.value = "";
     }
   }
 
-  function checkKey(e: React.KeyboardEvent<HTMLFormElement>) {
-    if (e.key === "Enter") {
-      e.preventDefault();
-    }
+  function onSubmit(data: FormInputValues) {
+    const { title, content } = data;
+    if (title && content) createNewPost(title, content, tags);
   }
-
-  async function create(data: InputType) {
-    createNewPost(data.title, data.content, tags);
-  }
-
-  const arr_color = ["orange", "blue", "green", "yellow", "red", "purple", "teal"];
 
   return (
-    <form
-      onSubmit={handleSubmit(create)}
-      onKeyDown={(e) => {
-        checkKey(e);
-      }}
-    >
+    <Form onSubmit={onSubmit} schema={POST_SCHEMA}>
       <Flex
         direction="column"
         backgroundColor="white"
@@ -82,22 +39,11 @@ function CreatePost() {
       >
         <Box>
           <Text fontWeight={800}>Title : </Text>
-          <Input {...register("title")} placeholder="Title of post" focusBorderColor="green.200" />
-          <Text fontSize="sm" color="red" ml="2">
-            {errors.title?.message}
-          </Text>
+          <FormInput name="title" type="text" placeHolder="Title of post" />
         </Box>
         <Box>
           <Text fontWeight={800}>Content : </Text>
-          <Textarea
-            {...register("content")}
-            placeholder="Content for your post"
-            focusBorderColor="green.200"
-            h="40"
-          />
-          <Text fontSize="sm" color="red" ml="2">
-            {errors.content?.message}
-          </Text>
+          <FormInput name="content" type="textarea" placeHolder="Title of post" />
         </Box>
         <Box>
           <Text fontWeight={800}>Tags : </Text>
@@ -107,7 +53,7 @@ function CreatePost() {
                 key={index}
                 borderRadius="md"
                 variant="solid"
-                colorScheme={arr_color[index % arr_color.length]}
+                colorScheme={TAG_COLORS[index % TAG_COLORS.length]}
                 mr="3"
                 mb="2"
               >
@@ -122,19 +68,23 @@ function CreatePost() {
               </Tag>
             ))}
           </Text>
-          <Input
-            ref={tagRef}
-            placeholder="ex. javascript, react, nodejs"
-            focusBorderColor="green.200"
-            onKeyDown={addTag}
-          />
+          <Flex>
+            <Input
+              ref={tagRef}
+              placeholder="ex. javascript, react, nodejs"
+              focusBorderColor="green.200"
+            />
+            <Button colorScheme="green" variant="outline" ml="2" onClick={addTag}>
+              Add
+            </Button>
+          </Flex>
         </Box>
 
         <Button colorScheme="green" type="submit">
           Create post
         </Button>
       </Flex>
-    </form>
+    </Form>
   );
 }
 

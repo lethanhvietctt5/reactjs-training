@@ -4,7 +4,7 @@ type Post = {
   author_name?: string;
   tags: string[];
   title: string;
-  body: string;
+  content: string;
   created_at: number;
   updated_at: number;
 };
