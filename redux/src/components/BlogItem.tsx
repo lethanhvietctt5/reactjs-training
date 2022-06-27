@@ -11,7 +11,7 @@ function BlogItem({ post }: Props) {
   const arr_color = ["orange.400", "blue.400", "green.400", "yellow.400"];
 
   return (
-    <Link to={`/${post.id}`}>
+    <Link to={`/posts/${post.id}`}>
       <Box backgroundColor="white" borderRadius="lg" p="5" cursor="pointer" h="full">
         <Heading noOfLines={2} size="lg" fontWeight="900">
           {post.title}

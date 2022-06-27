@@ -1,31 +1,18 @@
-import { RootState } from "./../store";
-import { AxiosResponse } from "axios";
 import { PayloadAction } from "@reduxjs/toolkit";
-import { call, put, select, takeEvery } from "redux-saga/effects";
-import { addBookmark, fetchBookmark, removeBookmark } from "redux/slices/bookmark";
-import { BookmarkState } from "./../slices/bookmark";
 import userApi from "api/bookmarkApi";
+import { call, put, select, takeEvery } from "redux-saga/effects";
+import { addBookmark, fetchBookmark, removeBookmark, setBookmark } from "redux/slices/bookmark";
+import Bookmark from "types/bookmark";
 import User from "types/user";
-
-type BookmarkResponse = {
-  id: string;
-  user_id: string;
-  list_bookmark: string[];
-};
+import { RootState } from "./../store";
 
 function* getBookmark(action: PayloadAction<User>) {
   try {
-    const res: AxiosResponse<BookmarkResponse[]> = yield call(
-      userApi.getBookmark,
-      action.payload.id
-    );
+    const bookmark: Bookmark = yield call(userApi.getBookmark, action.payload.id);
 
-    const { id, list_bookmark } = res.data[0];
-    const data: BookmarkState = {
-      id,
-      bookmarks: list_bookmark,
-    };
-    yield put(fetchBookmark(data));
+    const { id, collections } = bookmark;
+
+    yield put(setBookmark({ id, collections }));
   } catch (err) {
     console.log(err);
   }
@@ -51,7 +38,7 @@ function* removePostFromBookmark(action: PayloadAction<string>) {
 
 export default function* watcherBookmark() {
   // Watch if login success then fetch bookmark of current user
-  // yield takeEvery(loginSuccess.type, getBookmark);
+  yield takeEvery(fetchBookmark.type, getBookmark);
 
   // Watch when user add new post to bookmark
   yield takeEvery(addBookmark.type, addPostToBookmark);

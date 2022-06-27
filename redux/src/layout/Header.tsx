@@ -1,4 +1,4 @@
-import { EditIcon } from "@chakra-ui/icons";
+import { EditIcon, SearchIcon } from "@chakra-ui/icons";
 import { Box, Button, ButtonGroup, Flex, Heading, Icon, Text, Tooltip } from "@chakra-ui/react";
 import { useAppDispatch } from "hooks";
 import useAuthentication from "hooks/useAuthentication";
@@ -32,48 +32,53 @@ function Header() {
               <Text fontWeight="black">Blogs</Text>
             </Link>
           </Heading>
-          {currentUser ? (
-            <Flex align="center" gap="4">
-              <Link to="/create">
-                <Tooltip hasArrow label="Create new post">
-                  <EditIcon w={12} color="green" h="full" p="2" />
-                </Tooltip>
-              </Link>
-              <Link to="/bookmark">
-                <Tooltip hasArrow label="Go to collection" shouldWrapChildren>
-                  <Icon
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="12"
-                    height="full"
-                    p={2}
-                    color="green.600"
-                    viewBox="0 0 256 256"
-                  >
-                    <path
-                      fill="currentColor"
-                      d="M208 24H72a32.1 32.1 0 0 0-32 32v168a8 8 0 0 0 8 8h144a8 8 0 0 0 0-16H56a16 16 0 0 1 16-16h136a8 8 0 0 0 8-8V32a8 8 0 0 0-8-8Zm-24 96l-25.6-19.2a3.9 3.9 0 0 0-4.8 0L128 120V40h56Z"
-                    ></path>
-                  </Icon>
-                </Tooltip>
-              </Link>
-              <Button color="white" backgroundColor="green.400" size="md" onClick={handleLogout}>
-                Logout
-              </Button>
-            </Flex>
-          ) : (
-            <ButtonGroup gap={4}>
-              <Link to="/login">
-                <Button color="white" backgroundColor="green.400" size="md">
-                  Login
+          <Flex align="center" gap="4">
+            <Link to="/posts/search">
+              <SearchIcon w={12} color="green" h="full" p="3" />
+            </Link>
+            {currentUser ? (
+              <>
+                <Link to="/create">
+                  <Tooltip hasArrow label="Create new post">
+                    <EditIcon w={12} color="green" h="full" p="2" />
+                  </Tooltip>
+                </Link>
+                <Link to="/bookmark">
+                  <Tooltip hasArrow label="Go to collection" shouldWrapChildren>
+                    <Icon
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="12"
+                      height="full"
+                      p={2}
+                      color="green.600"
+                      viewBox="0 0 256 256"
+                    >
+                      <path
+                        fill="currentColor"
+                        d="M208 24H72a32.1 32.1 0 0 0-32 32v168a8 8 0 0 0 8 8h144a8 8 0 0 0 0-16H56a16 16 0 0 1 16-16h136a8 8 0 0 0 8-8V32a8 8 0 0 0-8-8Zm-24 96l-25.6-19.2a3.9 3.9 0 0 0-4.8 0L128 120V40h56Z"
+                      ></path>
+                    </Icon>
+                  </Tooltip>
+                </Link>
+                <Button color="white" backgroundColor="green.400" size="md" onClick={handleLogout}>
+                  Logout
                 </Button>
-              </Link>
-              <Link to="/register">
-                <Button color="green.400" backgroundColor="white" size="md" variant="outline">
-                  Register
-                </Button>
-              </Link>
-            </ButtonGroup>
-          )}
+              </>
+            ) : (
+              <ButtonGroup gap={4}>
+                <Link to="/login">
+                  <Button color="white" backgroundColor="green.400" size="md">
+                    Login
+                  </Button>
+                </Link>
+                <Link to="/register">
+                  <Button color="green.400" backgroundColor="white" size="md" variant="outline">
+                    Register
+                  </Button>
+                </Link>
+              </ButtonGroup>
+            )}
+          </Flex>
         </Flex>
       </Box>
     </Flex>

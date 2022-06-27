@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Post from "types/post";
 
 function useBookmark() {
-  const postIds = useAppSelector((state) => state.bookmark.bookmarks);
+  const postIds = useAppSelector((state) => state.bookmark.collections);
   const [posts, setPosts] = useState<Post[]>([]);
 
   useEffect(() => {

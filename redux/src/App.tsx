@@ -11,7 +11,7 @@ import Layout from "layout";
 import ProtectdRoute from "route/ProtectdRoute";
 import AuthorRoute from "route/AuthorRoute";
 import "./App.scss";
-
+import SearchPost from "pages/SearchPost";
 
 function App() {
   return (
@@ -21,7 +21,11 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
-          <Route path="posts" element={<Posts />} />
+          <Route path="posts">
+            <Route index element={<Posts />} />
+            <Route path="search" element={<SearchPost />} />
+            <Route path=":post_id" element={<PostDetail />} />
+          </Route>
           <Route element={<ProtectdRoute redirectPath="/login" />}>
             <Route path="create" element={<CreatePost />} />
             <Route path="bookmark" element={<Bookmark />} />
@@ -29,7 +33,6 @@ function App() {
               <Route path=":post_id" element={<EditPost />} />
             </Route>
           </Route>
-          <Route path=":post_id" element={<PostDetail />} />
         </Route>
       </Routes>
     </div>

@@ -28,8 +28,8 @@ function usePagination() {
     if (currentPage > 1) setParams({ page: String(currentPage - 1) });
   }
 
-  function changePage(page_number: number) {
-    setParams({ page: String(page_number) });
+  function changePage(pageNumber: number) {
+    setParams({ page: String(pageNumber) });
   }
 
   function nextPage() {

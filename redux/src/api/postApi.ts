@@ -8,6 +8,7 @@ const postApi = {
     const res = await api.get<Post>("/posts/" + post_id);
     return res.data;
   },
+
   createPost: async function (
     title: string,
     content: string,
@@ -26,6 +27,7 @@ const postApi = {
     };
     await api.post("/posts", newPost);
   },
+
   editPost: async function (post: Post, title: string, content: string, tags: string[]) {
     await api.put("posts/" + post.id, {
       id: post.id,
@@ -38,6 +40,7 @@ const postApi = {
       updated_at: new Date().getTime(),
     });
   },
+
   getPosts: async function (
     limit?: number,
     page?: number
@@ -54,6 +57,11 @@ const postApi = {
       posts: res.data,
       total: totalRecord ? totalRecord : 0,
     };
+  },
+
+  searchPosts: async function (keyword: string): Promise<Post[]> {
+    const res = await api.get<Post[]>(`/posts?q=${keyword}`);
+    return res.data;
   },
 };
 

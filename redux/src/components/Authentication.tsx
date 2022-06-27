@@ -1,7 +1,9 @@
 import authApi from "api/authApi";
+import { useAppDispatch } from "hooks";
 import useCustomToast from "hooks/useCustomToast";
 import React, { createContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { fetchBookmark } from "redux/slices/bookmark";
 import Authentication from "types/authentication";
 import User from "types/user";
 
@@ -25,6 +27,7 @@ const AuthenticationProvider = ({ children }: AuthenticationProviderProps) => {
   const [currentUser, setCurrentUser] = useState<User | undefined>(undefined);
   const navigate = useNavigate();
   const { toastError } = useCustomToast();
+  const dispatch = useAppDispatch();
 
   function login(email: string, password: string) {
     setLogining(true);
@@ -33,6 +36,7 @@ const AuthenticationProvider = ({ children }: AuthenticationProviderProps) => {
       if (user) {
         setCurrentUser(user);
         setFailed(false);
+        dispatch(fetchBookmark(user));
         navigate("/");
       } else {
         setFailed(true);

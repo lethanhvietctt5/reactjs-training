@@ -2,9 +2,9 @@ import api from "api";
 import Bookmark from "types/bookmark";
 
 const bookmarkApi = {
-  getBookmark: async function (user_id: string): Promise<string[]> {
-    const res = await api.get<string[]>("/bookmarks?user_id=" + user_id);
-    return res.data;
+  getBookmark: async function (user_id: string): Promise<Bookmark> {
+    const res = await api.get<Bookmark[]>("/bookmarks?user_id=" + user_id);
+    return res.data[0];
   },
   addBookmark: async function (bookmark_id: string, post_id: string): Promise<void> {
     const res = await api.get<Bookmark>("/bookmarks/" + bookmark_id);

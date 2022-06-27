@@ -1,39 +1,51 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import User from "types/user";
 
-export type BookmarkState = {
+export interface BookmarkPayload {
   id: string;
-  bookmarks: string[];
-};
+  collections: string[];
+}
+
+export interface BookmarkState extends BookmarkPayload {
+  fetching: boolean;
+  failed: boolean;
+}
 
 const initState: BookmarkState = {
   id: "",
-  bookmarks: [],
+  collections: [],
+  fetching: false,
+  failed: false,
 };
 
 const bookmarkSlice = createSlice({
   name: "bookmark",
   initialState: initState,
   reducers: {
-    fetchBookmark: (state, action: PayloadAction<BookmarkState>) => {
-      const { id, bookmarks } = action.payload;
+    fetchBookmark: (state, action: PayloadAction<User>) => {
+      state.fetching = true;
+      state.failed = false;
+    },
+    setBookmark: (state, action: PayloadAction<BookmarkPayload>) => {
+      const { id, collections } = action.payload;
       state.id = id;
-      state.bookmarks.push(...bookmarks);
-      // state.bookmarks.concat(bookmarks);
+      state.collections.push(...collections);
     },
     addBookmark: (state, action: PayloadAction<string>) => {
-      state.bookmarks.push(action.payload);
+      state.collections.push(action.payload);
     },
     removeBookmark: (state, action: PayloadAction<string>) => {
-      state.bookmarks = state.bookmarks.filter((item) => item !== action.payload);
+      state.collections = state.collections.filter((item) => item !== action.payload);
     },
     resetBoomark: (state) => {
       state.id = "";
-      state.bookmarks = [];
+      state.collections = [];
     },
   },
 });
 
 const bookmarkReducer = bookmarkSlice.reducer;
 
-export const { fetchBookmark, addBookmark, removeBookmark, resetBoomark } = bookmarkSlice.actions;
+export const { fetchBookmark, addBookmark, removeBookmark, resetBoomark, setBookmark } =
+  bookmarkSlice.actions;
 export default bookmarkReducer;

@@ -7,14 +7,14 @@ import { Box } from "@chakra-ui/react";
 
 type FormProps = {
   children: React.ReactNode;
-  schema: AnyObjectSchema;
+  schema?: AnyObjectSchema;
   onSubmit: (data: FormInputValues) => void;
   defaultValues?: FormInputValues;
 };
 
 function Form({ children, schema, onSubmit, defaultValues }: FormProps) {
   const methods = useForm<FormInputValues>({
-    resolver: yupResolver(schema),
+    resolver: schema ? yupResolver(schema) : undefined,
     defaultValues,
   });
 

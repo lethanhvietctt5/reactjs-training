@@ -17,7 +17,7 @@ function PostDetail() {
 
   const { currentUser } = useAuthentication();
   const dispatch = useAppDispatch();
-  const bookmarks = useAppSelector((state) => state.bookmark.bookmarks);
+  const bookmarks = useAppSelector((state) => state.bookmark.collections);
 
   function handleBookmark(post_id: string) {
     if (bookmarks.includes(post_id)) {

@@ -4,6 +4,7 @@ type FormInputValues = {
   name?: string;
   title?: string;
   content?: string;
+  search?: string;
 };
 
 export default FormInputValues;
