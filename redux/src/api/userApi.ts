@@ -13,9 +13,8 @@ const userApi = {
       id: nanoid(),
       email,
       name,
-      password,
     };
-    const res = await api.post<User>("/users", newUser);
+    const res = await api.post<User>("/users", { ...newUser, password });
     return res.data;
   },
 };

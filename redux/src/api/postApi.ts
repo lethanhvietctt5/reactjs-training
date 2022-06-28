@@ -63,6 +63,10 @@ const postApi = {
     const res = await api.get<Post[]>(`/posts?q=${keyword}`);
     return res.data;
   },
+
+  deletePost: async function (postId: string): Promise<void> {
+    await api.delete(`/posts/${postId}`);
+  },
 };
 
 export default postApi;

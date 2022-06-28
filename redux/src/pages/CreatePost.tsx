@@ -4,13 +4,13 @@ import Form from "components/Form";
 import FormInput from "components/FormInput";
 import { TAG_COLORS } from "constants/colors";
 import { POST_SCHEMA } from "constants/schemas";
-import usePost from "hooks/usePost";
+import useCreatePost from "hooks/useCreatePost";
 import useTags from "hooks/useTags";
 import FormInputValues from "types/formInput";
 
 function CreatePost() {
   const { tags, tagRef, addTag, setTags } = useTags();
-  const { createNewPost } = usePost();
+  const createNewPost = useCreatePost();
 
   function onSubmit(data: FormInputValues) {
     const { title, content } = data;

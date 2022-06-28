@@ -21,6 +21,7 @@
     "framer-motion": "^6",
     "husky": "^8.0.1",
     "json-server": "^0.17.0",
+    "jsonwebtoken": "^8.5.1",
     "lint-staged": "^13.0.3",
     "nanoid": "^4.0.0",
     "prettier": "^2.7.1",
@@ -42,7 +43,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "json-server --watch db.json --port 8000",
+    "server": "node server.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix"
   },

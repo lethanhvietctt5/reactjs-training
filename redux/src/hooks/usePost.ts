@@ -19,19 +19,6 @@ function usePost(post_id?: string) {
     }
   }, [post_id]);
 
-  async function createNewPost(title: string, content: string, tags: string[]) {
-    if (currentUser) {
-      try {
-        await postApi.createPost(title, content, tags, currentUser);
-        toastSuccess("Created new post successful.");
-        navigate("/posts");
-      } catch (err) {
-        toastError("Failed to create new post.");
-      }
-    }
-    return navigate("/login");
-  }
-
   async function editPost(title: string, content: string, tags: string[]) {
     if (currentUser && post) {
       try {
@@ -44,7 +31,7 @@ function usePost(post_id?: string) {
     }
   }
 
-  return { post, createNewPost, editPost };
+  return { post, editPost };
 }
 
 export default usePost;
