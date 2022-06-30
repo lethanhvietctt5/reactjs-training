@@ -12,7 +12,7 @@
     "default-case": "warn",
     "no-duplicate-imports": "error",
     "require-await": "error",
-    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-unused-vars": "warn",
     "@typescript-eslint/no-explicit-any": "error",
     "@typescript-eslint/no-unused-expressions": "warn"
   }
