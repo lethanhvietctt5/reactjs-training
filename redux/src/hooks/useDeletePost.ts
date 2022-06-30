@@ -1,9 +1,9 @@
-import postApi from "api/postApi";
+import { postApi } from "api";
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import useCustomToast from "./useCustomToast";
+import { useCustomToast } from ".";
 
-function useDeletePost() {
+export function useDeletePost() {
   const [params, setParams] = useSearchParams();
   const [isConfirming, setIsConfirming] = useState<boolean>(Boolean(params.get("confirming")));
   const { toastError, toastSuccess } = useCustomToast();
@@ -31,5 +31,3 @@ function useDeletePost() {
 
   return { isConfirming, setIsConfirming, deletePost };
 }
-
-export default useDeletePost;

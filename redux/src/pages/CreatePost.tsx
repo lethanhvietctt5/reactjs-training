@@ -2,11 +2,9 @@ import { Box, Button, Flex, Input, Tag, TagCloseButton, TagLabel, Text } from "@
 
 import Form from "components/Form";
 import FormInput from "components/FormInput";
-import { TAG_COLORS } from "constants/colors";
-import { POST_SCHEMA } from "constants/schemas";
-import useCreatePost from "hooks/useCreatePost";
-import useTags from "hooks/useTags";
-import FormInputValues from "types/formInput";
+import { POST_SCHEMA, TAG_COLORS } from "constant";
+import { useCreatePost, useTags } from "hooks";
+import { FormInputValues } from "types";
 
 function CreatePost() {
   const { tags, tagRef, addTag, setTags } = useTags();

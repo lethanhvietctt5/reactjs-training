@@ -1,6 +1,5 @@
 import { Grid } from "@chakra-ui/react";
-import React from "react";
-import Post from "types/post";
+import { Post } from "types";
 import BlogItem from "./BlogItem";
 
 type Props = {

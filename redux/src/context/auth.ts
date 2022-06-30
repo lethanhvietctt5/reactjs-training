@@ -1,5 +1,5 @@
 import { createContext } from "react";
-import Authentication from "types/authentication";
+import { Authentication } from "types";
 
 const initAuthCtxValue: Authentication = {
   logining: false,

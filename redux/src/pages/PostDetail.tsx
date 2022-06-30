@@ -1,16 +1,13 @@
 import { TimeIcon } from "@chakra-ui/icons";
 import { Badge, Box, Flex, Heading, Text, Tooltip } from "@chakra-ui/react";
-import { TAG_COLORS } from "constants/colors";
-import useAuthentication from "hooks/useAuthentication";
-import useBookmark from "hooks/useBookmark";
-import usePost from "hooks/usePost";
+import { TAG_COLORS } from "constant";
 import { AiOutlineUser } from "react-icons/ai";
 import { BsBookmark, BsFillBookmarkFill } from "react-icons/bs";
 import { FiEdit2 } from "react-icons/fi";
 import { Link, useParams } from "react-router-dom";
 import { RiDeleteBin6Line } from "react-icons/ri";
-import useDeletePost from "hooks/useDeletePost";
 import ConfirmModal from "components/ConfirmModal";
+import { useAuthentication, useBookmark, useDeletePost, usePost } from "hooks";
 
 function PostDetail() {
   const { post_id } = useParams();

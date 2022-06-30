@@ -1,8 +1,8 @@
 import api from "api";
 import { nanoid } from "nanoid";
-import User from "types/user";
+import { User } from "types";
 
-const userApi = {
+export const userApi = {
   getUserById: async function (user_id: string): Promise<User> {
     const res = await api.get<User>(`/users/${user_id}`);
     return res.data;
@@ -18,5 +18,3 @@ const userApi = {
     return res.data;
   },
 };
-
-export default userApi;

@@ -1,12 +1,12 @@
 import { Box, Button, Flex, Text } from "@chakra-ui/react";
 import { Link, useNavigate } from "react-router-dom";
 
-import userApi from "api/userApi";
+import { userApi } from "api";
 import Form from "components/Form";
 import FormInput from "components/FormInput";
-import { REGISTER_SCHEMA } from "constants/schemas";
-import useCustomToast from "hooks/useCustomToast";
-import FormInputValues from "types/formInput";
+import { REGISTER_SCHEMA } from "constant/schemas";
+import { FormInputValues } from "types";
+import { useCustomToast } from "hooks";
 
 function Register() {
   const { toastError, toastSuccess } = useCustomToast();

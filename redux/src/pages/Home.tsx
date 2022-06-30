@@ -3,7 +3,7 @@ import { Box, Flex } from "@chakra-ui/react";
 import ListPosts from "components/ListPosts";
 import Loading from "components/Loading";
 import SomethingWrong from "components/SomethingWrong";
-import usePosts from "hooks/usePosts";
+import { usePosts } from "hooks";
 import { Link } from "react-router-dom";
 
 function Home() {

@@ -1,9 +1,8 @@
 import api from "api";
 import { nanoid } from "nanoid";
-import Post from "types/post";
-import User from "types/user";
+import { Post, User } from "types";
 
-const postApi = {
+export const postApi = {
   getPostById: async function (post_id: string): Promise<Post> {
     const res = await api.get<Post>("/posts/" + post_id);
     return res.data;
@@ -68,5 +67,3 @@ const postApi = {
     await api.delete(`/posts/${postId}`);
   },
 };
-
-export default postApi;

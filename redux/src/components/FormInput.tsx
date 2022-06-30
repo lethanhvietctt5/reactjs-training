@@ -1,7 +1,7 @@
 import { Box, Input, Text, Textarea } from "@chakra-ui/react";
 import { ErrorMessage } from "@hookform/error-message";
 import { useController, UseControllerProps } from "react-hook-form";
-import FormInputValues from "types/formInput";
+import { FormInputValues } from "types";
 
 type FormInputProps = {
   type: string;

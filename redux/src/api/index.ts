@@ -28,3 +28,7 @@ api.interceptors.response.use(
 );
 
 export default api;
+export * from "./authApi";
+export * from "./bookmarkApi";
+export * from "./postApi";
+export * from "./userApi";

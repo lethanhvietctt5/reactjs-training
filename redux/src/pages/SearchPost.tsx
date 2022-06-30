@@ -1,7 +1,7 @@
 import { Box, Flex, Input } from "@chakra-ui/react";
 import ListPosts from "components/ListPosts";
 import SomethingWrong from "components/SomethingWrong";
-import useSearchPosts from "hooks/useSearchPosts";
+import { useSearchPosts } from "hooks";
 
 function SearchPost() {
   const { keyword, setKeyword, posts, failed } = useSearchPosts();

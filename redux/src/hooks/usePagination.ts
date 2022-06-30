@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
-function usePagination() {
+export function usePagination() {
   const [params, setParams] = useSearchParams();
   const [arrPages, setArrPages] = useState([1, 2, 3, 4, 5]);
   const [currentPage, setCurrentPage] = useState(
@@ -38,5 +38,3 @@ function usePagination() {
 
   return { currentPage, arrPages, changePage, prevPage, nextPage };
 }
-
-export default usePagination;

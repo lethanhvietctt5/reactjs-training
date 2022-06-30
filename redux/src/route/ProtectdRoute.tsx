@@ -1,4 +1,4 @@
-import useAuthentication from "hooks/useAuthentication";
+import { useAuthentication } from "hooks";
 import { Navigate, Outlet } from "react-router-dom";
 
 type Props = {

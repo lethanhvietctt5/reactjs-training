@@ -1,7 +1,7 @@
 import api from "api";
-import Bookmark from "types/bookmark";
+import { Bookmark } from "types";
 
-const bookmarkApi = {
+export const bookmarkApi = {
   getBookmark: async function (user_id: string): Promise<Bookmark> {
     const res = await api.get<Bookmark[]>("/bookmarks?user_id=" + user_id);
     return res.data[0];
@@ -23,5 +23,3 @@ const bookmarkApi = {
     });
   },
 };
-
-export default bookmarkApi;

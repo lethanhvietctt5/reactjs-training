@@ -1,6 +1,6 @@
 import { useToast } from "@chakra-ui/react";
 
-function useCustomToast() {
+export function useCustomToast() {
   const toast = useToast();
 
   function toastSuccess(title: string) {
@@ -25,5 +25,3 @@ function useCustomToast() {
 
   return { toastSuccess, toastError };
 }
-
-export default useCustomToast;

@@ -1,10 +1,10 @@
-import postApi from "api/postApi";
 import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import Post from "types/post";
-import useDebounce from "./useDebounce";
+import { postApi } from "api";
+import { Post } from "types";
+import { useDebounce } from ".";
 
-function useSearchPosts() {
+export function useSearchPosts() {
   const [params, setParams] = useSearchParams();
   const [keyword, setKeyword] = useState<string>(
     typeof params.get("q") === "string" ? (params.get("q") as string) : ""
@@ -33,5 +33,3 @@ function useSearchPosts() {
 
   return { keyword, setKeyword, posts, failed };
 }
-
-export default useSearchPosts;

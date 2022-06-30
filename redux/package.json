@@ -45,7 +45,8 @@
     "eject": "react-scripts eject",
     "server": "node server.js",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "postinstall": "cd ../ && husky install ./redux/.husky && cd ./redux && npx husky add .husky/pre-commit \"yarn lint-staged\""
   },
   "eslintConfig": {
     "extends": [
@@ -72,7 +73,9 @@
   },
   "lint-staged": {
     "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}": [
-      "prettier --write"
+      "yarn lint",
+      "prettier --write",
+      "git add ."
     ]
   },
   "devDependencies": {

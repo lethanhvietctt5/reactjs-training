@@ -1,9 +1,9 @@
-import postApi from "api/postApi";
+import { postApi } from "api";
 import { useAppSelector } from "hooks";
 import { useEffect, useState } from "react";
-import Post from "types/post";
+import { Post } from "types";
 
-function useBookmarkPosts() {
+export function useBookmarkPosts() {
   const postIds = useAppSelector((state) => state.bookmark.collections);
   const [posts, setPosts] = useState<Post[]>([]);
 
@@ -22,5 +22,3 @@ function useBookmarkPosts() {
   }, [postIds]);
   return [posts];
 }
-
-export default useBookmarkPosts;

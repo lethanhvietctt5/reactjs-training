@@ -1,11 +1,10 @@
-import postApi from "api/postApi";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Post from "types/post";
-import useAuthentication from "./useAuthentication";
-import useCustomToast from "./useCustomToast";
+import { postApi } from "api";
+import { Post } from "types";
+import { useAuthentication, useCustomToast } from ".";
 
-function usePost(post_id?: string) {
+export function usePost(post_id?: string) {
   const [post, setPost] = useState<Post | undefined>(undefined);
   const { currentUser } = useAuthentication();
   const { toastSuccess, toastError } = useCustomToast();
@@ -33,5 +32,3 @@ function usePost(post_id?: string) {
 
   return { post, editPost };
 }
-
-export default usePost;

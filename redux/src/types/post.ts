@@ -1,4 +1,4 @@
-type Post = {
+export type Post = {
   id: string;
   author_id: string;
   author_name?: string;
@@ -8,5 +8,3 @@ type Post = {
   created_at: number;
   updated_at: number;
 };
-
-export default Post;

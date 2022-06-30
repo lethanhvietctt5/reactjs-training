@@ -3,9 +3,9 @@ import { Link, Navigate } from "react-router-dom";
 
 import Form from "components/Form";
 import FormInput from "components/FormInput";
-import { LOGIN_SCHEMA } from "constants/schemas";
-import useAuthentication from "hooks/useAuthentication";
-import FormInputValues from "types/formInput";
+import { LOGIN_SCHEMA } from "constant";
+import { FormInputValues } from "types";
+import { useAuthentication } from "hooks";
 
 function Login() {
   const { currentUser, login } = useAuthentication();

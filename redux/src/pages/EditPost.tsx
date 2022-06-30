@@ -4,11 +4,9 @@ import { Box, Button, Flex, Input, Tag, TagCloseButton, TagLabel, Text } from "@
 import Form from "components/Form";
 import FormInput from "components/FormInput";
 import Loading from "components/Loading";
-import { TAG_COLORS } from "constants/colors";
-import { POST_SCHEMA } from "constants/schemas";
-import usePost from "hooks/usePost";
-import useTags from "hooks/useTags";
-import FormInputValues from "types/formInput";
+import { FormInputValues } from "types";
+import { POST_SCHEMA, TAG_COLORS } from "constant";
+import { usePost, useTags } from "hooks";
 
 function EditPost() {
   const { post_id } = useParams();

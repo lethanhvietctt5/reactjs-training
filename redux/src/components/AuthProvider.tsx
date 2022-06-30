@@ -1,12 +1,10 @@
-import authApi from "api/authApi";
-import { AuthContext } from "context/auth";
-import { useAppDispatch } from "hooks";
-import useCustomToast from "hooks/useCustomToast";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AuthContext } from "context/auth";
 import { fetchBookmark, resetBoomark } from "redux/slices/bookmark";
-import { AuthResponse } from "types/authentication";
-import User from "types/user";
+import { useAppDispatch, useCustomToast } from "hooks";
+import { AuthResponse, User } from "types";
+import { authApi } from "api";
 
 type AuthProviderProps = {
   children: React.ReactNode;
@@ -37,6 +35,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
       setLogining(false);
 
       const { user, message, access_token } = authRes;
+      console.log(authRes);
       if (message) {
         setFailed(true);
         toastError(message);

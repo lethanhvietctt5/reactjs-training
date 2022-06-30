@@ -1,8 +1,7 @@
-import { AuthResponse } from "types/authentication";
-import User from "types/user";
+import { AuthResponse, User } from "types";
 import api from ".";
 
-const authApi = {
+export const authApi = {
   login: async function (email: string, password: string): Promise<AuthResponse> {
     const res = await api.post<AuthResponse>("/login", { email, password });
     return res.data;
@@ -13,5 +12,3 @@ const authApi = {
     return res.data;
   },
 };
-
-export default authApi;

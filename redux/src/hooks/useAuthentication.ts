@@ -1,7 +1,7 @@
 import { AuthContext } from "context/auth";
 import { useContext } from "react";
 
-function useAuthentication() {
+export function useAuthentication() {
   const { currentUser, login, logout, failed } = useContext(AuthContext);
   return {
     currentUser,
@@ -10,5 +10,3 @@ function useAuthentication() {
     failed,
   };
 }
-
-export default useAuthentication;

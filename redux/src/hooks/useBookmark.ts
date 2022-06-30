@@ -1,9 +1,8 @@
 import { useAppDispatch, useAppSelector } from "hooks";
 import { addBookmark, removeBookmark } from "redux/slices/bookmark";
-import useAuthentication from "./useAuthentication";
-import useCustomToast from "./useCustomToast";
+import { useCustomToast, useAuthentication } from ".";
 
-function useBookmark() {
+export function useBookmark() {
   const dispatch = useAppDispatch();
   const bookmarks = useAppSelector((state) => state.bookmark.collections);
   const { toastSuccess } = useCustomToast();
@@ -22,5 +21,3 @@ function useBookmark() {
   }
   return { bookmarks, handleBookmark };
 }
-
-export default useBookmark;

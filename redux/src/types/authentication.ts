@@ -1,6 +1,6 @@
-import User from "./user";
+import { User } from "./user";
 
-type Authentication = {
+export type Authentication = {
   logining: boolean;
   failed: boolean;
   currentUser: User | undefined;
@@ -14,5 +14,3 @@ export type AuthResponse = {
   access_token?: string;
   message?: string;
 };
-
-export default Authentication;

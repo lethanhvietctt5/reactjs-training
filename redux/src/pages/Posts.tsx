@@ -3,8 +3,7 @@ import BlogItem from "components/BlogItem";
 import Loading from "components/Loading";
 import Pagination from "components/Pagination";
 import SomethingWrong from "components/SomethingWrong";
-import usePagination from "hooks/usePagination";
-import usePosts from "hooks/usePosts";
+import { usePagination, usePosts } from "hooks";
 
 function Posts() {
   const { currentPage, arrPages, changePage, nextPage, prevPage } = usePagination();

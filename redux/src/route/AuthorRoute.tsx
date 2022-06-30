@@ -1,8 +1,8 @@
-import postApi from "api/postApi";
-import useAuthentication from "hooks/useAuthentication";
+import { postApi } from "api";
+import { useAuthentication } from "hooks";
 import { useEffect, useState } from "react";
 import { Navigate, Outlet, useParams } from "react-router-dom";
-import Post from "types/post";
+import { Post } from "types";
 
 type Props = {
   redirectPath: string;

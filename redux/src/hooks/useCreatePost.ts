@@ -1,9 +1,8 @@
-import postApi from "api/postApi";
+import { postApi } from "api";
 import { useNavigate } from "react-router-dom";
-import useAuthentication from "./useAuthentication";
-import useCustomToast from "./useCustomToast";
+import { useAuthentication, useCustomToast } from ".";
 
-function useCreatePost() {
+export function useCreatePost() {
   const { currentUser } = useAuthentication();
   const { toastSuccess, toastError } = useCustomToast();
   const navigate = useNavigate();
@@ -23,5 +22,3 @@ function useCreatePost() {
 
   return createNewPost;
 }
-
-export default useCreatePost;

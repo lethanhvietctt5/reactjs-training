@@ -1,14 +1,13 @@
 import { PayloadAction } from "@reduxjs/toolkit";
-import userApi from "api/bookmarkApi";
+import { bookmarkApi } from "api";
 import { call, put, select, takeEvery } from "redux-saga/effects";
 import { addBookmark, fetchBookmark, removeBookmark, setBookmark } from "redux/slices/bookmark";
-import Bookmark from "types/bookmark";
-import User from "types/user";
+import { Bookmark, User } from "types";
 import { RootState } from "./../store";
 
 function* getBookmark(action: PayloadAction<User>) {
   try {
-    const bookmark: Bookmark = yield call(userApi.getBookmark, action.payload.id);
+    const bookmark: Bookmark = yield call(bookmarkApi.getBookmark, action.payload.id);
 
     const { id, collections } = bookmark;
 
@@ -21,7 +20,7 @@ function* getBookmark(action: PayloadAction<User>) {
 function* addPostToBookmark(action: PayloadAction<string>) {
   try {
     const id: string = yield select((state: RootState) => state.bookmark.id);
-    yield call(userApi.addBookmark, id, action.payload);
+    yield call(bookmarkApi.addBookmark, id, action.payload);
   } catch (err) {
     console.log(err);
   }
@@ -30,7 +29,7 @@ function* addPostToBookmark(action: PayloadAction<string>) {
 function* removePostFromBookmark(action: PayloadAction<string>) {
   try {
     const id: string = yield select((state: RootState) => state.bookmark.id);
-    yield call(userApi.removeBookmark, id, action.payload);
+    yield call(bookmarkApi.removeBookmark, id, action.payload);
   } catch (err) {
     console.log(err);
   }

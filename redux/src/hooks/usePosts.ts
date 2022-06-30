@@ -1,10 +1,8 @@
-import postApi from "api/postApi";
-import userApi from "api/userApi";
+import { postApi, userApi } from "api";
 import { useEffect, useState } from "react";
-import Post from "types/post";
-import User from "types/user";
+import { Post, User } from "types";
 
-function usePosts(currentPage: number) {
+export function usePosts(currentPage: number) {
   const [posts, setPosts] = useState<Post[]>([]);
   const [fetching, setFetching] = useState<boolean>(false);
   const [failed, setFailed] = useState<boolean>(false);
@@ -52,5 +50,3 @@ function usePosts(currentPage: number) {
 
   return { posts, fetching, failed, totalRecord, limit };
 }
-
-export default usePosts;

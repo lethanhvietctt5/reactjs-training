@@ -1,4 +1,4 @@
-type FormInputValues = {
+export type FormInputValues = {
   email?: string;
   password?: string;
   name?: string;
@@ -6,5 +6,3 @@ type FormInputValues = {
   content?: string;
   search?: string;
 };
-
-export default FormInputValues;

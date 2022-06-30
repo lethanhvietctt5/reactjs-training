@@ -1,9 +1,9 @@
 import React from "react";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { FormProvider, useForm } from "react-hook-form";
-import { AnyObjectSchema } from "yup";
-import FormInputValues from "types/formInput";
 import { Box } from "@chakra-ui/react";
+import { FormProvider, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { AnyObjectSchema } from "yup";
+import { FormInputValues } from "types";
 
 type FormProps = {
   children: React.ReactNode;

@@ -30,16 +30,16 @@ function isAuthenticated({ email, password }) {
 }
 
 server.post("/login", (req, res) => {
-  console.log("hello");
   const { email, password } = req.body;
   if (isAuthenticated({ email, password }) === false) {
     const message = "Incorrect email or password";
-    res.status(401).json({ message });
+    res.json({ message });
     return;
   }
   const access_token = createToken({ email, password });
   const user = db.users.filter((user) => user.email === email && user.password === password)[0];
   res.status(200).json({ access_token, user });
+  return;
 });
 
 server.post("/auth", (req, res) => {
