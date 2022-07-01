@@ -27,7 +27,12 @@ export const postApi = {
     await api.post("/posts", newPost);
   },
 
-  editPost: async function (post: Post, title: string, content: string, tags: string[]) {
+  editPost: async function (
+    post: Post,
+    title: string,
+    content: string,
+    tags: string[]
+  ): Promise<void> {
     await api.put("posts/" + post.id, {
       id: post.id,
       author_id: post.author_id,

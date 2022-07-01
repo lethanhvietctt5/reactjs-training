@@ -16,10 +16,10 @@ export const bookmarkApi = {
   },
   removeBookmark: async function (id: string, post_id: string): Promise<void> {
     const res = await api.get("/bookmarks/" + id);
-    let bookmark: string[] = res.data[0].list_bookmark;
-    bookmark = bookmark.filter((item) => item !== post_id);
+    let collections: string[] = res.data.collections;
+    collections = collections.filter((item) => item !== post_id);
     await api.put("/bookmarks/" + id, {
-      list_bookmark: bookmark,
+      collections,
     });
   },
 };

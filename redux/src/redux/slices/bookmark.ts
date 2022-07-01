@@ -27,9 +27,10 @@ const bookmarkSlice = createSlice({
       state.failed = false;
     },
     setBookmark: (state, action: PayloadAction<BookmarkPayload>) => {
+      state.id = "";
       const { id, collections } = action.payload;
       state.id = id;
-      state.collections.push(...collections);
+      state.collections = [...collections];
     },
     addBookmark: (state, action: PayloadAction<string>) => {
       state.collections.push(action.payload);
